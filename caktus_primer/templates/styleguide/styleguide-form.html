@@ -1,0 +1,22 @@
+{% extends "styleguide/styleguide.html" %}
+
+{% load styleguide_tags %}
+
+{% block styleguide_content %}
+    <h1 class="styleguide-page-title">Simple form example</h1>
+    {% example wide=True %}
+        <!-- DOCS -->
+        <p>Below is an example of a user creation form.  Note the pre-populated email field which contains a readonly field so that the email cannot be edited.</p>
+        <p>This field also contains an aria-readonly field which is necessary for accessibility. </p>
+        <!-- TEMPLATE -->
+        <form>
+            <fieldset>
+                {% for field in create_user_form %}
+                    {{ field }}
+                    {{ field.label_tag }}
+                {% endfor %}
+                <input type=submit value="Save" formnovalidate>
+            </fieldset>
+        </form>
+    {% endexample %}
+{% endblock %}

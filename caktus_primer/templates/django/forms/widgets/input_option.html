@@ -1,0 +1,8 @@
+{% include "django/forms/widgets/input.html" %}
+<label{% if widget.attrs.id %} data-foo="123" for="{{ widget.attrs.id }}"{% endif %}>{%spaceless%}
+    {% if widget.label|slice:"-1" == ":" %}
+        {{ widget.label|slice:":-1" }}
+    {% else %}
+        {{ widget.label }}
+    {% endif %}
+{%endspaceless%}</label>

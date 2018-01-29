@@ -1,0 +1,140 @@
+{% extends "styleguide/styleguide.html" %}
+
+{% load styleguide_tags %}
+
+{% block styleguide_content %}
+
+<h1 class="styleguide-heading">Inputs</h2>
+
+<h2 class="styleguide-heading">Basic Field Layouts</h2>
+
+{% example %}
+<!-- TEMPLATE -->
+    <form>
+        <fieldset>
+            {{ everything_bagel_form.text }}
+            {{ everything_bagel_form.text.label_tag }}
+        </fieldset>
+    </form>
+{% endexample %}
+
+{% example %}
+    <!-- DOCS -->
+    <p>All field should be contained in <code>fieldset</code> tags.</p>
+
+    <p>Every field must follow a properly associated <code>label</code> tag.</p>
+
+    <p>Each <code>label</code> must have a <code>for</code> attribute matching the next <code>input</code>'s ID.</p>
+
+    <!-- TEMPLATE -->
+    <fieldset>
+        {{ everything_bagel_form.text }}
+        {{ everything_bagel_form.text.label_tag }}
+
+        {{ everything_bagel_form.password }}
+        {{ everything_bagel_form.password.label_tag }}
+    </fieldset>
+{% endexample %}
+
+
+<h2 class="styleguide-heading">Checkboxes</h2>
+
+{% example %}
+<!-- DOCS -->
+Checkboxes must be contained in a <code>fieldset</code>.
+
+<!-- TEMPLATE -->
+    <fieldset>
+        <legend>Pick One or More</legend>
+
+        {{ everything_bagel_form.checkbox1 }}
+        {{ everything_bagel_form.checkbox1.label_tag }}
+
+        {{ everything_bagel_form.checkbox2 }}
+        {{ everything_bagel_form.checkbox2.label_tag }}
+    </fieldset>
+{% endexample %}
+
+<h2 class="styleguide-heading">Radios</h2>
+
+{% example %}
+<!-- TEMPLATE -->
+    <fieldset>
+        <legend>Pick Just One</legend>
+
+        {{ everything_bagel_form.radio }}
+        {# No label because the labels are part of the individual options! #}
+    </fieldset>
+{% endexample %}
+
+<h2 class="styleguide-heading">Fieldsets with Error</h2>
+
+{% example %}
+<!-- TEMPLATE -->
+    <fieldset>
+        <legend>Pick Just One
+            <span class="error">Please enter a correct phone number format</span>
+        </legend>
+
+        {{ everything_bagel_form.radio }}
+    </fieldset>
+{% endexample %}
+
+<h2 class="styleguide-heading">Input States</h2>
+
+{% example "Errors" %}
+    <!-- TEMPLATE -->
+    <fieldset>
+        {{ everything_bagel_form.text_with_error }}
+        {{ everything_bagel_form.text_with_error.label_tag }}
+        <span class="error">Please enter a correct phone number format</span>
+    </fieldset>
+{% endexample %}
+
+
+{% example "Disabled" %}
+    <!-- DOCS -->
+    Disabled fields cannot be changed and will not be sent as part of the form.
+
+    <!-- TEMPLATE -->
+    <fieldset>
+            {{ everything_bagel_form.disabled_text }}
+            {{ everything_bagel_form.disabled_text.label_tag }}
+    </fieldset>
+{% endexample %}
+
+{% example "Readonly" %}
+    <!-- DOCS -->
+    Readonly fields cannot be changed and will be sent as part of the form..
+
+    <!-- TEMPLATE -->
+    <fieldset>
+        {{ everything_bagel_form.readonly_text }}
+        {{ everything_bagel_form.readonly_text.label_tag }}
+    </fieldset>
+{% endexample %}
+
+
+<h2 class="styleguide-heading">Selects</h2>
+
+{% example "Native Select" %}
+    <!-- TEMPLATE -->
+    <fieldset>
+        {{ everything_bagel_form.select }}
+    </fieldset>
+{% endexample %}
+
+<h2 class="styleguide-heading">Special Inputs</h2>
+<p>The following examples below are marked up as input elements however rendered as buttons by the browser.</p>
+    {% example "File/Upload Button" %}
+    <!-- TEMPLATE -->
+        <fieldset>
+            {{ everything_bagel_form.file }}
+            {{ everything_bagel_form.file.label_tag }}
+        </fieldset>
+    {% endexample %}
+
+    {% example "Submit Button" %}
+        <input type="submit" />
+    {% endexample %}
+{% endblock %}

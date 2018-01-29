@@ -1,0 +1,206 @@
+{% extends "styleguide/styleguide.html" %}
+
+{% load styleguide_tags %}
+
+{% block styleguide_content %}
+
+<h1 class="styleguide-page-title">Layout Examples</h1>
+<p>Here are some examples of how you can use our grid system for your various layout needs.</p>
+<p>Some best practices to keep in mind:</p>
+<ol>
+  <li>Prefer percentages or viewport units over pixel units.</li>
+  <li>Prefer mobile-first approach when introducing breakpoints.</li>
+  <li>Prefer HTML5 elements over generic div elements.</li>
+</ol>
+<h2 class="styleguide-heading">Hero Full-width, Two Column Example</h2>
+
+{% example wide=True %}
+  <!-- DOCS -->
+  Make simple layouts with rows of panels!
+
+  <!-- Stylus -->
+  section
+    border: 1px solid #ccc
+
+    &:nth-child(even)
+      background: white
+
+    img
+      display: inline-block
+      margin: 0 auto
+      width: 100%
+
+  .page-container
+    &:nth-child(2n)
+      panels(row, 0.33, 0.66)
+
+    article
+        background: #e6eeec
+
+    aside
+        border-right: 1px solid #ccc
+        background: darkgrey
+
+  <!-- HTML -->
+  <section>
+      <img class="hero" src="http://via.placeholder.com/750x250">
+      <h1>Hero Image Section Title</h1>
+      <h2>Random Text Title</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas neque arcu, interdum et elit blandit, finibus laoreet tellus. Morbi luctus, purus at euismod hendrerit, nisl purus efficitur ipsum, ac mollis justo leo ut lacus.</p>
+  </section>
+  <section class="page-container first-example">
+    <aside>
+      <h3>Sidebar Title</h3>
+      <ul>
+        <li>One</li>
+        <li>Two</li>
+        <li>Three</li>
+      </ul>
+    </aside>
+    <article>
+      <h2>Article Title</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas neque arcu, interdum et elit blandit, finibus laoreet tellus. Morbi luctus, purus at euismod hendrerit, nisl purus efficitur ipsum, ac mollis justo leo ut lacus.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas neque arcu, interdum et elit blandit, finibus laoreet tellus. Morbi luctus, purus at euismod hendrerit, nisl purus efficitur ipsum, ac mollis justo leo ut lacus.</p>
+      <img src="http://via.placeholder.com/1260x750" alt="Example Image">
+    </article>
+  </section>
+  <section>
+    <h2>Section Title</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas neque arcu, interdum et elit blandit, finibus laoreet tellus. Morbi luctus, purus at euismod hendrerit, nisl purus efficitur ipsum, ac mollis justo leo ut lacus.</p>
+    <p>Mauris molestie, libero nec dignissim egestas, tellus tellus ultrices nunc, nec volutpat nisi felis sed lacus. Integer molestie at magna vitae rutrum.</p>
+    <p>Curabitur pulvinar, mauris sed congue lacinia, mauris enim venenatis mi, at pulvinar sapien purus vel nunc. Maecenas convallis mauris lorem, in suscipit metus malesuada eget.</p>
+  </section>
+{% endexample %}
+
+<h2 class="styleguide-heading">Hero Full-width, Reverse Column example</h2>
+
+{% example wide=True %}
+  <!-- DOCS -->
+  There is no need to move or change elements around in the markup if you need to switch panels around. Simply reverse the direction of your flex container to switch the order of elements.
+
+  <!-- Stylus -->
+  section
+    border: 1px solid #ccc
+
+    &:nth-child(even)
+      background: white
+
+    img
+      display: inline-block
+      margin: 0 auto
+      width: 100%
+
+  .page-container
+    &:nth-child(2n)
+      panels(row-reverse, 0.33, 0.66)
+
+    article
+        background: #e6eeec
+
+    aside
+        border-right: 1px solid #ccc
+        background: darkgrey
+
+  <!-- HTML -->
+  <section>
+      <img class="hero" src="http://via.placeholder.com/750x250">
+  </section>
+  <section class="page-container second-example">
+    <aside>
+      <h3>Sidebar Title</h3>
+      <ul>
+        <li>One</li>
+        <li>Two</li>
+        <li>Three</li>
+      </ul>
+    </aside>
+    <article>
+      <h2>Article Title</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas neque arcu, interdum et elit blandit, finibus laoreet tellus. Morbi luctus, purus at euismod hendrerit, nisl purus efficitur ipsum, ac mollis justo leo ut lacus.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas neque arcu, interdum et elit blandit, finibus laoreet tellus. Morbi luctus, purus at euismod hendrerit, nisl purus efficitur ipsum, ac mollis justo leo ut lacus.</p>
+      <img src="http://via.placeholder.com/1260x750" alt="Example Image">
+    </article>
+
+  </section>
+{% endexample %}
+
+<h2 class="styleguide-heading">Hero Full-width, Three Column example</h2>
+
+{% example wide=True %}
+  <!-- DOCS -->
+  The "panels" mixin can take as many arguments as you give them. As such, if you wanted a row of 3 columns, simply pass in 3 parameters.
+
+  <!-- Stylus -->
+  section
+    border: 1px solid #ccc
+
+    &:nth-child(even)
+      background: white
+
+    img
+      display: inline-block
+      margin: 0 auto
+      width: 100%
+
+  .page-container
+    &:nth-child(2n)
+      panels(row, 0.25, 0.50, 0.25)
+
+    article
+        background: #e6eeec
+
+    aside
+        border-right: 1px solid #ccc
+        background: darkgrey
+
+  <!-- HTML -->
+  <section>
+      <img class="hero" src="http://via.placeholder.com/750x250">
+  </section>
+  <section class="page-container third-example">
+    <aside>
+      <h3>Sidebar Title</h3>
+      <ul>
+        <li>One</li>
+        <li>Two</li>
+        <li>Three</li>
+      </ul>
+    </aside>
+    <article>
+      <h2>Article Title</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas neque arcu, interdum et elit blandit, finibus laoreet tellus. Morbi luctus, purus at euismod hendrerit, nisl purus efficitur ipsum, ac mollis justo leo ut lacus.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas neque arcu, interdum et elit blandit, finibus laoreet tellus. Morbi luctus, purus at euismod hendrerit, nisl purus efficitur ipsum, ac mollis justo leo ut lacus.</p>
+      <img src="https://images.pexels.com/photos/627644/pexels-photo-627644.jpeg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb">
+    </article>
+    <aside>
+      <h3>Sidebar Title</h3>
+      <ul>
+        <li>One</li>
+        <li>Two</li>
+        <li>Three</li>
+      </ul>
+    </aside>
+  </section>
+
+{% endexample %}
+
+<h2 class="styleguide-heading">Make it Responsive</h2>
+
+{% example wide=True %}
+  <!-- DOCS -->
+  Use media queries to dictate when containers should be flexed.
+
+  <!-- Stylus -->
+  $maxScreenWidth = 960px
+
+  .page-container
+    display: block
+
+  @media all and (min-width:$maxScreenWidth)
+    .page-container
+      panels(row, 0.33, 0.66)
+
+  <!-- HTML -->
+{% endexample %}
+
+{% endblock %}

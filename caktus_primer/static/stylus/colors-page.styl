@@ -1,0 +1,227 @@
+/*****************************************
+              Color Page Styles
+******************************************/
+
+// Styles for Colors Page
+
+section.color-gallery
+	margin-top: 3rem
+	padding: 0
+	background-color: $palette.grayscale.white
+	.grid
+		border: 0 solid
+
+.swatches
+	display: grid
+	grid-template-columns: 22% 22% 22% 22%
+	grid-auto-rows: minmax(100px, auto);
+	grid-column-gap: 2vw
+	grid-row-gap: 2vw
+	max-width: 100%
+	margin: 0 auto
+	padding: 0
+	background-color: $palette.grayscale.white
+
+.swatch
+	padding: 0.5rem
+	border: 1px solid $palette.grayscale.light
+	list-style: none
+
+.swatch-hue
+	height: 100px
+	padding: 1rem
+
+.swatch-hue p
+	text-align: center
+
+.swatch-code
+	display: block
+	white-space: nowrap
+	overflow-x: auto
+
+.swatch-code-comment
+	margin-top: 0.5rem
+	margin-bottom: 0
+	font-size: 14px
+	color: $palette.grayscale.mid
+
+.primary-dark
+	background-color: $palette.primary.dark
+	color: $palette.grayscale.white
+	center()
+
+.primary
+	background-color: $palette.primary.base
+	color: $palette.grayscale.white
+	center()
+
+.primary-light
+	background-color: $palette.primary.light
+	color: $palette.primary.dark
+	center()
+
+.primary-very-light
+	background-color: $palette.primary.very-light
+	color: $palette.primary.dark
+	center()
+
+.secondary-dark
+	background-color: $palette.secondary.dark
+	color: $palette.grayscale.white
+	center()
+
+.secondary
+	background-color: $palette.secondary.base
+	color: $palette.grayscale.white
+	center()
+
+.secondary-light
+	background-color: $palette.secondary.light
+	color: $palette.secondary.dark
+	center()
+
+.secondary-very-light
+	background-color: $palette.secondary.very-light
+	color: $palette.secondary.dark
+	center()
+
+.accent-dark
+	background-color: $palette.accent.dark
+	color: $palette.grayscale.white
+	center()
+
+.accent
+	background-color: $palette.accent.base
+	color: $palette.grayscale.white
+	center()
+
+.accent-light
+	background-color: $palette.accent.light
+	color: $palette.accent-dark
+	center()
+
+.accent-very-light
+	background-color: $palette.accent.very-light
+	color: $palette.accent-dark
+	center()
+
+.black
+	background-color: $palette.grayscale.black
+	color: $palette.grayscale.white
+	center()
+
+.grayscale-very-dark
+	background-color: $palette.grayscale.very-dark
+	color: $palette.grayscale.white
+	center()
+
+.grayscale-dark
+	background-color: $palette.grayscale.dark
+	color: $palette.grayscale.white
+	center()
+
+.grayscale-mid
+	background-color: $palette.grayscale.mid
+	center()
+
+.grayscale-light
+	background-color: $palette.grayscale.light
+	center()
+
+.grayscale-very-light
+	background-color: $palette.grayscale.very-light
+	center()
+
+.white
+	background-color: $palette.grayscale.white
+	center()
+
+.success-dark
+	background-color: $palette.success.dark
+	color: $palette.grayscale.white
+	center()
+
+.success
+	background-color: $palette.success.base
+	color: $palette.grayscale.white
+	center()
+
+.success-light
+	background-color: $palette.success.light
+	color: $palette.success-dark
+	center()
+
+.success-very-light
+	background-color: $palette.success.very-light
+	color: $palette.success-dark
+	center()
+
+.alert-dark
+	background-color: $palette.alert.dark
+	color: $palette.grayscale.white
+	center()
+
+.alert
+	background-color: $palette.alert.base
+	color: $palette.grayscale.white
+	center()
+
+.alert-light
+	background-color: $palette.alert.light
+	color: $palette.alert-dark
+	center()
+
+.alert-very-light
+	background-color: $palette.alert.very-light
+	color: $palette.alert-dark
+	center()
+
+.neutral-dark
+	background-color: $palette.neutral.dark
+	color: $palette.grayscale.white
+	center()
+
+.neutral
+	background-color: $palette.neutral.base
+	color: $palette.grayscale.white
+	center()
+
+.neutral-light
+	background-color: $palette.neutral.light
+	color: $palette.neutral-dark
+	center()
+
+.neutral-very-light
+	background-color: $palette.neutral.very-light
+	color: $palette.neutral-dark
+	center()
+
+.disabled-light
+	background-color: $palette.disabled.light
+	color: $palette.disabled.mid
+	center()
+
+.disabled-very-light
+	background-color: $palette.disabled.very-light
+	color: $palette.disabled.light
+	center()
+
+
+// Styles for Color Usage Page
+div[class*=-element-example]
+	dislpay: flex
+	border-radius: 2px
+	center()
+	height: 88px;
+
+.primary-dark-element-example
+	primary-dark()
+	
+.primary-element-example
+	primary()
+	
+.primary-light-element-example
+	primary-light()
+	
+.primary-very-light-element-example
+	primary-very-light()

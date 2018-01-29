@@ -1,0 +1,92 @@
+/*
+  Variables to define the size of gutters in pseudo-grid rows.
+  The "layout gap multiplier" is used to specify the ratio of
+  inter-section whitespace to intra-section whitespace.
+
+  "gutter max" and "gutter min" are used to specify the vertical
+  margins between `section` elements as well as to specify the
+  gutter between cells created by the row() mixin, which needs
+  a min and max gutter value.
+*/
+$layout-gap-multipler = 2
+$gutter-min = $line-height-small * 1.25 * $layout-gap-multipler
+$gutter-max = $line-height-base * 1.25 * $layout-gap-multipler
+
+.l-page-container // standin for <body> in examples
+  width: 100%
+
+  > section
+    border: none
+    background-color: transparent
+    margin: 0 auto
+    max-width: 1024px
+
+    graduated(margin-top, $gutter-min, $gutter-max)
+    graduated(margin-bottom, $gutter-min, $gutter-max)
+
+    &:first-child
+      margin-top: 0
+
+    &:last-child
+      margin-bottom: 0
+
+    &.l-fullwidth
+      max-width: 100%
+
+    &.l-with-sidebar
+      row($gutter-min, $gutter-max, 0.6666, 0.3333)
+
+    &.l-with-left-sidebar
+      row($gutter-min, $gutter-max, 0.3333, 0.6666)
+
+    &.l-with-two-sidebars
+      row($gutter-min, $gutter-max, 0.25, 0.5, 0.25)
+
+/*
+  Green crosshatching added (in the special context of the SGP page)
+  to illustrate the proportions of inter-section whitespace.
+*/
+.l-page-container.section-whitespace-example,
+.l-page-container.main-whitespace-example
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIklEQVQYV2NkQAL3Pu3/zwjjgzhKfI6MYAEYB8RmROaABAADyQ+TT9hWmQAAAABJRU5ErkJggg==")
+
+/*
+  For the example that illustrates inter-section whitespace specifically.
+  By making these elements white, only the gap between content containers
+  is visible.
+*/
+.l-page-container.section-whitespace-example
+  > section
+    > article, > aside, > p
+      background: white
+
+.l-page-container.main-whitespace-example
+  /*
+    Overflow must be hidden for the background to be visible beneath top
+    and bottom margins at the absolute vertical edges of the container.
+  */
+  overflow: hidden
+
+  > *
+    background: white
+
+    /*
+      This is actually the *general* rule (NOTE!), but it is inserted
+      in this *specific* case because it is visually distracting in
+      other contexts.
+    */
+    &:first-child
+      graduated(margin-top, $gutter-min, $gutter-max)
+
+    &:last-child
+      graduated(margin-bottom, $gutter-min, $gutter-max)
+
+/*
+  Blue crosshatching, used to illustrate the ratio of the size of
+  inter- and intra-section spacing.
+*/
+article.section-content-whitespace-example
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIklEQVQYV2NkQAJVd5/9Z4TxQZw2ZSlGsACMA2IzInNAAgDuCw9BBk7VcwAAAABJRU5ErkJggg==") !important
+
+  > *
+    background: white

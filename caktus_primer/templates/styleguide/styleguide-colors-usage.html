@@ -1,0 +1,71 @@
+{% extends "styleguide/styleguide.html" %}
+
+{% load styleguide_tags %}
+
+{% block styleguide_content %}
+    <h1 class="styleguide-page-title">Color Usage</h1>
+    <h2 class="styleguide-heading">Background and text colors</h2>
+	<p>When using colors as background and text, be mindful of the background / text contrast. The default color palettes in this style guide primer lend themselves to the following background / text color pairs:</p>
+	<ul>
+		<li>Background dark / text white</li>
+		<li>Background base / text white</li>
+		<li>Background light / text dark and</li>
+		<li>Background very light / text base</li>
+	</ul>
+	<p>Background / text color pairs should be evaluated for each project based on its specific colors palettes.</p>
+	<p>For elements that require background and text color, write mixins as shown below, and use them to extend the elements' classes.</p>
+
+	{% example wide=True %}
+	<!-- Stylus -->
+	primary-dark()
+		background: $palette.primary.dark
+		color: $white
+
+	.primary-dark-element-example
+		primary-dark()
+
+	<!-- HTML -->
+	<div class="primary-dark-element-example">Element with white text on primary dark background</div>
+	{% endexample %}
+
+	{% example wide=True %}
+	<!-- Stylus -->
+	primary()
+		background: $palette.primary.base
+		color: $white
+
+	.primary-element-example
+		primary()
+
+	<!-- HTML -->
+	<div class="primary-element-example">Element with white text on primary background</div>
+	{% endexample %}
+
+	{% example wide=True %}
+	<!-- Stylus -->
+	primary-light()
+		background: $palette.primary.light
+		color: $palette.primary.dark
+
+	.primary-light-element-example
+		primary-light()
+
+	<!-- HTML -->
+	<div class="primary-light-element-example">Element with primary dark text on primary light background</div>
+	{% endexample %}
+
+
+	{% example wide=True %}
+	<!-- Stylus -->
+	primary-very-light()
+		background: $palette.primary.base
+		color: $palette.primary.base
+
+	.primary-very-light-element-example
+		primary-very-light()
+
+	<!-- HTML -->
+	<div class="primary-very-light-element-example">Element with primary text on primary very light background</div>
+	{% endexample %}
+
+{% endblock %}

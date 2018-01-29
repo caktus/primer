@@ -1,0 +1,246 @@
+{% extends "styleguide/styleguide.html" %}
+
+{% block styleguide_content %}
+    <h1 class="styleguide-page-title">Colors</h1>
+	<p>Color is used to represent the brand and to communicate feedback about user actions.</p>
+	<p>Brand colors are expressed as primary, secondary, and accent colors. For brands with a more extensive color palette, additional designations are needed.</p>
+	<p>Action colors may be derived from brand colors if appropriate. They communicate main categories of feedback about user actions: success (as well as other types of affirmative actions, e.g. confirmation), alert (as well as destructive actions, e.g. delete), and neutral, e.g. informative feedback with neutral effect.</p>
+
+    <h2 class="styleguide-heading">Brand and User Action Color Palettes</h2>
+    <p>Color palettes consist of base color values espressed as variables, and their derivatives — dark, light, and very light, expressed as Stylus hash objects.</p>
+    <p>For each color, the derivatives are built as evenly spaced steps of alpha transparency.</p>
+    <p>Colors are retrieved from hash objects by concatenating the hash name, key name, and nested key name, e.g. <code>$palette.primary.dark</code>.</p>
+
+	<h3 class="styleguide-heading">Primary</h3>
+    <ul class="grid swatches">
+		<li class="swatch">
+			<div class="swatch-hue primary-very-dark">
+			</div>
+			<code class="swatch-code">$palette.primary.very-dark</code>
+		</li>
+		<li class="swatch">
+			<div class="swatch-hue primary-dark">
+			</div>
+			<code class="swatch-code">$palette.primary.dark</code>
+		</li>
+		<li class="swatch">
+			<div class="swatch-hue primary">
+			</div>
+			<code class="swatch-code">$palette.primary.base</code>
+		</li>
+		<li class="swatch">
+			<div class="swatch-hue primary-light">
+			</div>
+			<code class="swatch-code">$palette.primary.light</code>
+		</li>
+		<li class="swatch">
+			<div class="swatch-hue primary-very-light">
+			</div>
+			<code class="swatch-code">$palette.primary.very-light</code>
+		</li>
+	</ul>
+
+	<h3 class="styleguide-heading">Secondary</h3>
+	<ul class="grid swatches">
+		<li class="swatch">
+			<div class="swatch-hue secondary-very-dark">
+			</div>
+			<code class="swatch-code">$palette.secondary.very-dark</code>
+		</li>
+		<li class="swatch">
+			<div class="swatch-hue secondary-dark">
+			</div>
+			<code class="swatch-code">$palette.secondary.dark</code>
+		</li>
+		<li class="swatch">
+			<div class="swatch-hue secondary">
+			</div>
+			<code class="swatch-code">$palette.secondary.base</code>
+		</li>
+		<li class="swatch">
+			<div class="swatch-hue secondary-light">
+			</div>
+			<code class="swatch-code">$palette.secondary.light</code>
+		</li>
+		<li class="swatch">
+			<div class="swatch-hue secondary-very-light">
+			</div>
+			<code class="swatch-code">$palette.secondary.very-light</code>
+		</li>
+	</ul>
+
+	<h3 class="styleguide-heading">Accent</h3>
+	<ul class="grid swatches">
+		<li class="swatch">
+			<div class="swatch-hue accent-very-dark">
+			</div>
+			<code class="swatch-code">$palette.accent.very-dark</code>
+		</li>
+		<li class="swatch">
+			<div class="swatch-hue accent-dark">
+			</div>
+			<code class="swatch-code">$palette.accent.dark</code>
+		</li>
+		<li class="swatch">
+			<div class="swatch-hue accent">
+			</div>
+			<code class="swatch-code">$palette.accent.base</code>
+		</li>
+		<li class="swatch">
+			<div class="swatch-hue accent-light">
+			</div>
+			<code class="swatch-code">$palette.accent.light</code>
+		</li>
+		<li class="swatch">
+			<div class="swatch-hue accent-very-light">
+			</div>
+			<code class="swatch-code">$palette.accent.very-light</code>
+		</li>
+	</ul>
+	
+	<h3 class="styleguide-heading">Success</h3>
+	<ul class="grid swatches">
+		<li class="swatch">
+			<div class="swatch-hue success-very-dark">
+			</div>
+			<code class="html hljs xml swatch-code">$palette.success.very-dark</code>
+		</li>
+		<li class="swatch">
+			<div class="swatch-hue success-dark">
+			</div>
+			<code class="html hljs xml swatch-code">$palette.success.dark</code>
+		</li>
+		<li class="swatch">
+			<div class="swatch-hue success">
+			</div>
+			<code class="swatch-code">$palette.success.base</code>
+		</li>
+		<li class="swatch">
+			<div class="swatch-hue success-light">
+			</div>
+			<code class="swatch-code">$palette.success.light</code>
+		</li>
+		<li class="swatch">
+			<div class="swatch-hue success-very-light">
+			</div>
+			<code class="swatch-code">$palette.success.very-light</code>
+		</li>
+	</ul>
+	
+	<h3 class="styleguide-heading">Alert</h3>
+	<ul class="grid swatches">
+		<li class="swatch">
+			<div class="swatch-hue alert-very-dark">
+			</div>
+			<code class="swatch-code">$palette.alert.very-dark</code>
+		</li>
+		<li class="swatch">
+			<div class="swatch-hue alert-dark">
+			</div>
+			<code class="swatch-code">$palette.alert.dark</code>
+		</li>
+		<li class="swatch">
+			<div class="swatch-hue alert">
+			</div>
+			<code class="swatch-code">$palette.alert.base</code>
+		</li>
+		<li class="swatch">
+			<div class="swatch-hue alert-light">
+			</div>
+			<code class="swatch-code">$palette.alert.light</code>
+		</li>
+		<li class="swatch">
+			<div class="swatch-hue alert-very-light">
+			</div>
+			<code class="swatch-code">$palette.alert.very-light</code>
+		</li>
+	</ul>
+
+	<h3 class="styleguide-heading">Neutral</h3>
+	<ul class="grid swatches">
+		<li class="swatch">
+			<div class="swatch-hue neutral-very-dark">
+			</div>
+			<code class="swatch-code">$palette.neutral.very-dark</code>
+		</li>
+		<li class="swatch">
+			<div class="swatch-hue neutral-dark">
+			</div>
+			<code class="swatch-code">$palette.neutral.dark</code>
+		</li>
+		<li class="swatch">
+			<div class="swatch-hue neutral">
+			</div>
+			<code class="swatch-code">$palette.neutral.base</code>
+		</li>
+		<li class="swatch">
+			<div class="swatch-hue neutral-light">
+			</div>
+			<code class="swatch-code">$palette.neutral.light</code>
+		</li>
+		<li class="swatch">
+			<div class="swatch-hue neutral-very-light">
+			</div>
+			<code class="swatch-code">$palette.neutral.very-light</code>
+		</li>
+	</ul>
+
+	<h2 class="styleguide-page-title">Grayscale</h2>
+	<p>Grayscale has a number of applications. Most common include communicate a disabled state of an element and creating a table zebra pattern.</p>
+	<p>Grayscale consists of black and white, and five shades that are alpha values between them, expressed as Stylus hash objects. Grayscale can be extended to include more shades as necessary.</p>
+
+	<p>Black, white, and the the shade of gray are retrieved from hash objects by concatenating the hash name, key, and nested key, e.g. <code>$palette.grayscale.dark</code>.</p>
+
+	<h3 class="styleguide-heading">Grayscale Range</h3>
+	<ul class="grid swatches">
+		<li class="swatch">
+			<div class="swatch-hue black">
+			</div>
+			<code class="swatch-code">$palette.grayscale.black</code>
+		</li>
+		<li class="swatch">
+			<div class="swatch-hue grayscale-very-dark">
+			</div>
+			<code class="swatch-code">$palette.grayscale.very-dark</code>
+		</li>
+		<li class="swatch">
+			<div class="swatch-hue grayscale-dark">
+			</div>
+			<code class="swatch-code">$palette.grayscale.dark</code>
+		</li>
+		<li class="swatch">
+			<div class="swatch-hue grayscale-mid">
+			</div>
+			<code class="swatch-code">$palette.grayscale.mid</code>
+		</li>
+		<li class="swatch">
+			<div class="swatch-hue grayscale-light">
+			</div>
+			<code class="swatch-code">$palette.grayscale.light</code>
+		</li>
+		<li class="swatch">
+			<div class="swatch-hue grayscale-very-light">
+			</div>
+			<code class="swatch-code">$palette.grayscale.very-light</code>
+		</li>
+		<li class="swatch">
+			<div class="swatch-hue white">
+			</div>
+			<code class="swatch-code">$palette.grayscale.white</code>
+		</li>
+	</ul>
+
+	<h3 class="styleguide-heading">Disabled</h3>
+		<ul class="grid swatches">
+			<li class="swatch">
+				<div class="swatch-hue disabled-light">
+				</div>
+				<code class="swatch-code">$palette.disabled.light</code>
+			</li>
+			<li class="swatch">
+				<div class="swatch-hue disabled-very-light">
+				</div>
+				<code class="swatch-code">$palette.disabled.very-light</code>
+			</li>
+		</ul>
+{% endblock %}

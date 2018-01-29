@@ -1,0 +1,71 @@
+/*****************************************
+         Color Palettes
+******************************************/
+
+// Variables
+
+$white = #ffffff
+$black = #2B2B28
+$primary-base = #9EC16C
+$secondary-base = #6C7A78
+$accent-base = #117f89
+$success-base = #9EC16C
+$alert-base = #CD3B3B
+$neutral-base = #6C7A78
+$disabled-base = #2B2B28
+
+// Palettes
+
+$palette = {
+	primary : {
+		dark : darken($primary-base, 40%),
+		base : $primary-base,
+		light : lighten($primary-base, 40%),
+		very-light : lighten($primary-base, 80%)
+	},
+	secondary : {
+		dark : darken($secondary-base, 40%),
+		base : $secondary-base,
+		light : lighten($secondary-base, 40%),
+		very-light : lighten($secondary-base, 80%)
+	},
+	accent : {
+		dark : darken($accent-base, 40%),
+		base : $accent-base,
+		light : lighten($accent-base, 40%),
+		very-light : lighten($accent-base, 80%)
+	},
+	grayscale : {
+		black: $black,
+		very-dark: lighten($black, 20%),
+		dark : lighten($black, 40%),
+		mid : lighten($black, 60%),
+		light : lighten($black, 80%),
+		very-light : lighten($black, 95%),
+		white: $white
+	},
+	success : {
+		dark : darken($success-base, 40%),
+		base : $success-base,
+		light : lighten($success-base, 40%),
+		very-light : lighten($success-base, 80%)
+	},
+	alert : {
+		dark : darken($alert-base, 40%),
+		base : $alert-base,
+		light : lighten($alert-base, 40%),
+		very-light : lighten($alert-base, 80%)
+	},
+	neutral : {
+		dark : darken($neutral-base, 40%),
+		base : $neutral-base,
+		light : lighten($neutral-base, 40%),
+		very-light : lighten($neutral-base, 80%)
+		},
+	disabled : {
+		dark : lighten($black, 40%),
+		mid : lighten($black, 60%),
+		light : lighten($black, 80%),
+		very-light : lighten($black, 95%)
+	}
+}

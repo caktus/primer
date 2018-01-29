@@ -1,0 +1,193 @@
+{% extends "styleguide/styleguide.html" %}
+
+{% load styleguide_tags %}
+
+{% block styleguide_content %}
+
+{% example %}
+  <!-- DOCS -->
+  Make rows of things!
+
+  <!-- HTML -->
+  <div class="l-row">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+  </div>
+{% endexample %}
+
+{% example %}
+  <!-- DOCS -->
+  Wrap rows of things when there are too many!
+
+  <!-- Stylus -->
+  .wrap
+    wrapping(4)
+
+  <!-- HTML -->
+  <div class="l-row wrap">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+  </div>
+{% endexample %}
+
+{% example %}
+  <!-- DOCS -->
+  Hide things when there are more than you need!
+
+  <!-- Stylus -->
+  .limit-4
+    limit(4)
+
+  <!-- HTML -->
+  <div class="l-row limit-4">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+  </div>
+{% endexample %}
+
+{% example %}
+  <!-- DOCS -->
+  Make simple layouts with rows of panels!
+
+  <!-- Stylus -->
+  .page-container
+    panels(row, 0.25, 0.75)
+
+    nav
+      background: darkgrey
+
+  <!-- HTML -->
+  <div class="page-container">
+    <nav>Navigation</nav>
+    <section>Content</section>
+  </div>
+{% endexample %}
+
+{% example %}
+  <!-- DOCS -->
+  Or columns!
+
+  <!-- Stylus -->
+  .page-container-2
+    panels(column, 0.2, 1, 0.2)
+
+    header, footer
+      background: darkgrey
+
+  <!-- HTML -->
+  <div class="page-container-2">
+    <header>Header</header>
+    <section>Content</section>
+    <footer>Footer</footer>
+  </div>
+{% endexample %}
+
+{% example wide=True %}
+  <!-- DOCS -->
+  Let your text flow in easy to read columns!
+
+  <!-- Stylus -->
+  .story
+    textColumns(3, 0.5em)
+
+  <!-- HTML -->
+  <div class="story">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin hendrerit,
+    ligula eu ullamcorper aliquet, purus augue faucibus lacus, eget pellentesque
+    massa nunc et magna. Sed posuere eu metus non condimentum. Sed dignissim
+    tortor orci, in facilisis ex cursus non. Mauris ultricies semper metus, in
+    molestie purus accumsan in. Suspendisse bibendum lorem sed dolor mattis posuere.
+    Fusce malesuada, lacus et ullamcorper accumsan, diam velit auctor odio, sit
+    amet imperdiet dui urna non ante. Suspendisse accumsan, est maximus
+    pellentesque iaculis, ligula massa pretium nisi, ac euismod justo turpis eget
+    elit. Proin erat lacus, finibus quis placerat in, ullamcorper ac lorem. Sed est
+    lectus, fermentum vitae ex id, laoreet ornare est. Maecenas vitae justo in augue
+    semper eleifend.</p>
+  </div>
+{% endexample %}
+
+{% example wide=True %}
+  <!-- DOCS -->
+  <p>Build grid based layouts with the helpful <code>gridLayout(4)</code> utility.</p>
+  <p>Simple specify the number of columns in your layout, 4 in this example, and define
+    the spread of the areas. Here we layout a header, nav, main section, and footer on
+    a 4-column grid.</p>
+  <p><code>gridLayout()</code> generates both a CSS Grid based version and a Flexbox
+    fallback for you.</p>
+
+  <!-- Stylus -->
+  .basic-page-grid2
+    gridLayout(4)
+    >*
+      background: grey
+      border: 1px solid black
+
+    header
+      gridItem(1, 1, 4, 1)
+    nav
+      gridItem(1, 2, 1, 2)
+    section
+      gridItem(2, 2, 3, 1)
+    footer
+      gridItem(2, 3, 3, 1)
+
+  <!-- HTML -->
+  <div class="basic-page-grid2">
+    <header>Header</header>
+    <nav>Navigation</nav>
+    <section>Content</section>
+    <footer>Footer</footer>
+  </div>
+{% endexample %}
+
+{% example wide=True %}
+  <!-- DOCS -->
+  <p>Of course, many layouts need to fit into different spaces. You can combine
+  these tools with simple media queries.</p>
+
+  <!-- Stylus -->
+  .basic-page-grid3
+    gridLayout(4)
+    >*
+      background: grey
+      border: 1px solid black
+
+    header
+      gridItem(1, 1, 2, 1)
+    nav
+      gridItem(3, 1, 2, 1)
+    section
+      gridItem(1, 2, 4, 1)
+    footer
+      gridItem(1, 3, 4, 1)
+
+    @media (min-width: 800px)
+      header
+        gridItem(1, 1, 4, 1)
+      nav
+        gridItem(1, 2, 1, 2)
+      section
+        gridItem(2, 2, 3, 1)
+      footer
+        gridItem(2, 3, 3, 1)
+
+  <!-- HTML -->
+  <div class="basic-page-grid3">
+    <header>Header</header>
+    <nav>Navigation</nav>
+    <section>Content</section>
+    <footer>Footer</footer>
+  </div>
+{% endexample %}
+
+{% endblock %}

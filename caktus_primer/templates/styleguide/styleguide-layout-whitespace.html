@@ -1,0 +1,259 @@
+{% extends "styleguide/styleguide.html" %}
+
+{% load styleguide_tags %}
+
+{% block styleguide_content %}
+
+<h1 class="styleguide-page-title">Whitespace Guidelines</h1>
+
+<p>
+  Here are some best practices to follow when applying whitespace
+  to sections of content in your project. Adopting these practices will
+  help users easily identify the different parts of your page or app
+  and navigate its contents without stress or frustration.
+</p>
+
+<p>
+  Please note: in some of the rendered HTML below, green or blue
+  crosshatching is used to illustrate the relative dimensions of
+  different whitespace regions. Please don't actually include this
+  kind of crosshatching in your project unless the design calls
+  for it!
+</p>
+
+<h2 class="styleguide-heading">Keep content aligned at edges</h2>
+{% example wide=True %}
+<!-- DOCS -->
+
+<p>
+  Ensure that normal page content is contained within elements that have a max
+  width and that are positioned on the page using automatic horizontal margins.
+</p>
+
+<p>
+  Also allow for "abnormal" page content that must span the full width of the page.
+  This can be made easier by not using a width-limited container for all content
+  and instead putting restrictions on individual content containers (e.g. sections).
+</p>
+
+<!-- Stylus -->
+$layout-gap-multipler = 2
+$gutter-min = $line-height-small * 1.25 * $layout-gap-multipler
+$gutter-max = $line-height-base * 1.25 * $layout-gap-multipler
+
+// standin for <body> in examples
+.l-page-container
+  width: 100%
+
+  > section
+    margin: 0 auto
+    max-width: 1024px
+
+    &.l-fullwidth
+      max-width: 100%
+
+    &.l-with-sidebar
+      row($gutter-min, $gutter-max, 0.6666, 0.3333)
+
+<!-- TEMPLATE -->
+<div class="l-page-container">
+  <section>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas neque arcu, interdum et elit blandit, finibus laoreet tellus. Morbi luctus, purus at euismod hendrerit, nisl purus efficitur ipsum, ac mollis justo leo ut lacus.</p>
+  </section>
+  <section class="l-fullwidth">
+      <img src="http://via.placeholder.com/1260x750" alt="Hero Image" class="hero">
+      <div>
+        <h1>Hero Image Section Title</h1>
+      </div>
+  </section>
+  <section class="l-with-sidebar">
+    <article>
+      <h2>Article Title</h2>
+      <p>{% lorem 30 w %}</p>
+      <p>{% lorem 30 w %}</p>
+    </article>
+    <aside>
+      <h3>Sidebar Title</h3>
+      <ul>
+        <li>One</li>
+        <li>Two</li>
+        <li>Three</li>
+      </ul>
+    </aside>
+  </section>
+  <section>
+    <article>
+      <h2>Article Title</h2>
+      <p>{% lorem 30 w %}</p>
+      <p>{% lorem 30 w %}</p>
+    </article>
+  </section>
+</div>
+{% endexample %}
+
+<h2 class="styleguide-heading">
+  Separate sections by consistent amounts of whitespace
+</h2>
+<h3 class="styleguide-heading">
+  … and measure section whitespace in the same units as content whitespace
+</h3>
+{% example wide=True %}
+<!-- DOCS -->
+<p>
+  Keep sections of content visually marked off from one another with a
+  consistent measure of space defined in terms of the same units and
+  mixins as in the whitespace that separate content elements. Reusing these
+  makes it easier to ensure that content and layout whitespace can be kept in
+  consistent relation to one another easily because like can be compared
+  with like.
+</p>
+
+<p>
+  Try to keep sections of content separated vertically and horizontally
+  by the same amount of whitespace.
+</p>
+
+<p>
+  Separate sections by top and bottom margins. Vertically adjacent
+  sections' margins will collapse, creating a consistent vertical rhythm.
+</p>
+
+<!-- Stylus -->
+/*
+  This includes only the rules relevant to showing how graduated() can
+  be used to make sure that top and side spacing can be kept identical
+  even when scaling is used to vary the size of the gap.
+*/
+
+$layout-gap-multipler = 2
+$gutter-min = $line-height-small * 1.25 * $layout-gap-multipler
+$gutter-max = $line-height-base * 1.25 * $layout-gap-multipler
+
+.l-page-container
+  > section
+    graduated(margin-top, $gutter-min, $gutter-max)
+    graduated(margin-bottom, $gutter-min, $gutter-max)
+
+    &.l-with-sidebar
+      row($gutter-min, $gutter-max, 0.6666, 0.3333)
+
+    &.l-with-left-sidebar
+      row($gutter-min, $gutter-max, 0.3333, 0.6666)
+
+    &.l-with-two-sidebars
+      row($gutter-min, $gutter-max, 0.25, 0.5, 0.25)
+
+      row(gutter-min, gutter-max, ratios...)
+          /*
+            See definition in layout.styl for implementation details.
+            Internally, row() uses graduated() to create grid-like cells
+            with gutters that intelligently scale between the gutter-min
+            and gutter-max values.
+          */
+
+<!-- TEMPLATE -->
+<div class="l-page-container section-whitespace-example">
+  <section class="l-with-sidebar">
+    <article>
+      <h2>Article Title</h2>
+      <p>{% lorem 30 w %}</p>
+      <p>{% lorem 30 w %}</p>
+    </article>
+    <aside>
+      <h3>Sidebar Title</h3>
+      <ul>
+        <li>One</li>
+        <li>Two</li>
+        <li>Three</li>
+      </ul>
+    </aside>
+  </section>
+  <section>
+    <p>{% lorem 30 w %}</p>
+  </section>
+  <section class="l-with-left-sidebar">
+    <aside>
+      <h3>Sidebar Title</h3>
+      <ul>
+        <li>One</li>
+        <li>Two</li>
+        <li>Three</li>
+      </ul>
+    </aside>
+    <article>
+      <h2>Article Title</h2>
+      <p>{% lorem 30 w %}</p>
+      <p>{% lorem 30 w %}</p>
+    </article>
+  </section>
+</div>
+{% endexample %}
+
+<h2 class="styleguide-heading">
+  Separate sections twice as widely as you separate content elements
+</h2>
+{% example wide=True %}
+<!-- DOCS -->
+<p>
+  Keep the spacing between content sections equal to twice the spacing
+  between content elements within sections.
+</p>
+
+<!-- TEMPLATE -->
+<div class="l-page-container section-whitespace-example">
+  <section>
+    <p>{% lorem 30 w %}</p>
+  </section>
+  <section class="l-with-sidebar">
+    <article class="section-content-whitespace-example">
+      <h2>Article Title</h2>
+      <p>{% lorem 30 w %}</p>
+      <p>{% lorem 30 w %}</p>
+    </article>
+    <aside>
+      <h3>Sidebar Title</h3>
+      <ul>
+        <li>One</li>
+        <li>Two</li>
+        <li>Three</li>
+      </ul>
+    </aside>
+  </section>
+</div>
+{% endexample %}
+
+{% example wide=True %}
+<!-- DOCS -->
+<p>
+  Keep the space above and below the main content equal.
+</p>
+
+<p>
+  The space separating two sections of main content should
+  be equal to the top / bottom space of the main content itself.
+</p>
+
+<!-- TEMPLATE -->
+<div class="l-page-container main-whitespace-example">
+  <section>
+    <p>{% lorem 30 w %}</p>
+  </section>
+  <section class="l-with-sidebar">
+    <article>
+      <h2>Article Title</h2>
+      <p>{% lorem 30 w %}</p>
+      <p>{% lorem 30 w %}</p>
+    </article>
+    <aside>
+      <h3>Sidebar Title</h3>
+      <ul>
+        <li>One</li>
+        <li>Two</li>
+        <li>Three</li>
+      </ul>
+    </aside>
+  </section>
+</div>
+{% endexample %}
+
+{% endblock styleguide_content %}

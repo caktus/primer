@@ -1,0 +1,57 @@
+@import 'variables.styl'
+@import 'mixins.styl'
+@import 'reset.styl'
+@import 'colors.styl'
+@import 'primer.styl'
+@import 'typography.styl'
+@import 'layout.styl'
+@import 'form.styl'
+@import 'colors-page.styl'
+@import 'typography-pages.styl'
+@import 'lists'
+@import 'examples.styl'
+@import 'layout-examples.styl'
+@import 'layout-whitespace.styl'
+
+*
+	&:first-child
+		margin-top: 0
+	&:last-child
+		margin-bottom: 0
+
+#styleguide-header
+	font-size: 150%
+
+.styleguide-code
+	font-size: 100%
+
+body
+	color: $palette.grayscale.black
+
+section
+	width: 100%
+	background-color: #eeeeee
+	box-sizing: border-box
+
+	nav
+		width: 100%
+		background-color: #e0e0e0
+		margin-top: -1em
+		margin-left: -1em
+		margin-bottom: 1em
+		padding: 1em
+
+a
+	color: $palette.accent.light
+	&:hover,
+	&:focus
+		color: $palette.accent.base
+
+generate-grid(columns)
+	display grid
+	grid-template-columns: repeat(columns, auto)
+	grid-auto-rows: minmax(100px, auto);
+	grid-column-gap: 2vw
+	grid-row-gap: 2vw
+	background-color: grey
+	border: 1px solid

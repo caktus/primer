@@ -1,0 +1,31 @@
+$maxScreenWidth = 960px
+
+section
+    border: 1px solid #ccc
+
+    &:nth-child(even)
+      background: white
+
+    img
+      display: inline-block
+      margin: 0 auto
+      width: 100%
+
+.page-container
+    display: block
+
+    article
+        background: #e6eeec
+
+    aside
+        border-right: 1px solid #ccc
+        background: darkgrey
+
+@media all and (min-width:$maxScreenWidth)
+    .page-container
+        &.first-example
+            panels(row, 0.33, 0.66)
+        &.second-example
+            panels(row-reverse, 0.33, 0.66)
+        &.third-example
+            panels(row, 0.25, 0.50, 0.25)

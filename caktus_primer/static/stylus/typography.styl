@@ -1,0 +1,141 @@
+/*
+ * With default user settings:
+ * • 0.625rem = 10px
+ * • 1.25rem  = 20px
+ * • 2.5rem   = 40px
+ */
+
+// Font weights map
+
+$font-weight = {
+	normal : normal,
+	bold : bold
+}
+
+// Helpers
+
+rem2px(r)
+	return r / 0.625 * 10
+
+px2rem(r)
+	return r * 0.625 / 10
+
+/*
+	Helper functions for `graduated`.
+
+	graduated-scaled returns the value with scale optionally applied.
+
+	graduated-lin returns the internal part of a calc() expression
+	that applies a linear function f(x) = (slope * x) + intercept
+	where f($minScreenWidth) = min and f($maxScreenWidth) = max.
+*/
+graduated-scaled(value, exponent=0)
+	if exponent > 0
+		value = value * ($fontScale ** exponent)
+	value
+
+graduated-lin(min, max, elUnit="px")
+	bareMin = unit(min, '')
+	bareMax = unit(max, '')
+	bareMaxScreen = unit($maxScreenWidth, '')
+	bareMinScreen = unit($minScreenWidth, '')
+	slope = (bareMax - bareMin) / (bareMaxScreen - bareMinScreen)
+	intercept = bareMin - (slope * bareMinScreen)
+	"(%s * 100vw) + %s" % (slope unit(intercept, elUnit))
+
+/*
+	Mixin to apply values that scale between min and max as the
+	window varies between $minScreenWidth and $maxScreenWidth,
+	with a minimum value min and maximum max.
+
+	Optionally supply an "exponent" value that will be used to scale
+	the min and max values (as the exponent of $fontScale value, to
+	be multiplied with the value).
+
+	Optionally supply a context string that the scaling value
+	will be interpolated into (e.g. "calc(%s - 30px)").
+*/
+graduated(prop, min, max, exponent=0, context="calc((%s))")
+	context = '' + context // ensure that this is used as a string
+	min = graduated-scaled(min, exponent)
+	max = graduated-scaled(max, exponent)
+
+	{prop}: context % unit(min, 'px')
+	debug-application: 'min width'
+
+	@media (min-width: unit($minScreenWidth, 'px'))
+		{prop}: context % graduated-lin(min, max)
+		debug-context: context
+		debug-exponent: exponent ** 1
+		debug-min: min
+		debug-max: max
+		debug-application: 'scaled width'
+
+	@media (min-width: unit($maxScreenWidth, 'px'))
+		{prop}: context % unit(max, 'px')
+		debug-application: 'max width'
+
+
+// Styles
+
+body
+	font-family: lucida, sans-serif
+	graduated(font-size, $font-size-small, $font-size-base)
+	graduated(line-height, $line-height-small, $line-height-base)
+
+h6
+	graduated(font-size, $font-size-very-small, $font-size-small, 0)
+	graduated(line-height, $line-height-very-small, $line-height-small, 0)
+
+h5
+	graduated(font-size, $font-size-small, $font-size-base, 0)
+	graduated(line-height, $line-height-small, $line-height-base, 0)
+h4
+	graduated(font-size, $font-size-small, $font-size-base, 1)
+	graduated(line-height, $line-height-small, $line-height-base, 1)
+
+h3
+	graduated(font-size, $font-size-small, $font-size-base, 2)
+	graduated(line-height, $line-height-small, $line-height-base, 2)
+
+h2
+	graduated(font-size, $font-size-small, $font-size-base, 3)
+	graduated(line-height, $line-height-heading, $line-height-heading, 3)
+
+h1
+	graduated(font-size, $font-size-small, $font-size-base, 4)
+	graduated(line-height, $line-height-heading, $line-height-heading, 4)
+
+h6,
+h5,
+h4,
+h3,
+h2,
+h1
+	font-weight: $font-weight.normal
+	graduated(margin-top, $line-height-small * 1.25, $line-height-base * 1.25)
+	margin-bottom: 0
+	+ p
+		graduated(margin-top, $line-height-small * 0.25, $line-height-base * 0.25)
+
+h6,
+h5,
+h4
+	font-weight: $font-weight.bold
+
+p
+	graduated(margin-bottom, $line-height-small * 1.25, $line-height-base * 1.25)
+
+blockquote
+	padding-left: 1rem
+	graduated(margin-top, $line-height-small * 1.25, $line-height-base * 1.25)
+	graduated(margin-right, $line-height-small * 2, $line-height-base * 2)
+	graduated(margin-bottom, $line-height-small * 1.25, $line-height-base * 1.25)
+	graduated(margin-left, $line-height-small * 2, $line-height-base * 2)
+	border-left: 10px solid
+	border-color: $palette.grayscale.very-light
+
+figcaption
+	graduated(font-size, $font-size-very-small, $font-size-small, 0)
+	graduated(line-height, $line-height-small, $line-height-small, 0)
+	color: $palette.grayscale.mid

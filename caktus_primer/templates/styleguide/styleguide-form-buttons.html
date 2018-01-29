@@ -1,0 +1,26 @@
+{% extends "styleguide/styleguide.html" %}
+
+{% load styleguide_tags %}
+
+{% block styleguide_content %}
+<h2 class="styleguide-heading">Basic Buttons</h2>
+<p>Use class names to denote a button's purpose and style.</p>
+    {% example "Default Button" %}
+        <button>Confirm</button>
+        <button class="cancel">Cancel</button>
+        <button class="danger">Erase All</button>
+    {% endexample %}
+<h2 class="styleguide-heading">Special Buttons</h2>
+<p>The following examples below represent exceptions using the <code>{% filter force_escape %}<button></button>{% endfilter %}</code> tag to denote button elements. These examples require the buttons to be marked up as <code>{% filter force_escape %}<input>{% endfilter %}</code> elements in order to work properly.</p>
+    {% example "File/Upload Button" %}
+    <!-- TEMPLATE -->
+        <fieldset>
+            {{ everything_bagel_form.file }}
+            {{ everything_bagel_form.file.label_tag }}
+        </fieldset>
+    {% endexample %}
+
+    {% example "Submit Button" %}
+        <input type="submit" />
+    {% endexample %}
+{% endblock %}
