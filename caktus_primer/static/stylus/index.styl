@@ -55,3 +55,29 @@ generate-grid(columns)
 	grid-row-gap: 2vw
 	background-color: grey
 	border: 1px solid
+
+.primer-dropdown
+	button
+		border-radius: 0
+	ul
+		list-style: none
+		margin: 0
+		padding: 0
+		border: 1px solid lightgrey
+		background: $palette.primary.very-light;
+		position: absolute
+		min-width: 200px
+
+		li
+			a
+				display: inline-block
+				height: 3em
+				padding: 1em 2em
+				outline: none
+				text-decoration: none
+				color: black
+
+			&:hover, &.selected
+				a
+					background: black
+					color: white

@@ -1,0 +1,21 @@
+{% extends "styleguide/styleguide.html" %}
+
+{% load styleguide_tags %}
+{% load jsx %}
+
+{% block styleguide_content %}
+
+{% example %}
+<!-- DOCS -->
+    A dropdown widget!
+<!-- TEMPLATE -->
+    {% jsx %}
+        <Dropdown label="Click Me">
+            <a href="#">Option 1</a>
+            <a href="#">Option 2</a>
+            <a href="#">Option 3</a>
+        </Dropdown>
+    {% endjsx %}
+{% endexample %}
+
+{% endblock %}
