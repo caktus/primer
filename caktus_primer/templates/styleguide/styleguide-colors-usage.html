@@ -3,69 +3,228 @@
 {% load styleguide_tags %}
 
 {% block styleguide_content %}
-    <h1 class="styleguide-page-title">Color Usage</h1>
-    <h2 class="styleguide-heading">Background and text colors</h2>
-	<p>When using colors as background and text, be mindful of the background / text contrast. The default color palettes in this style guide primer lend themselves to the following background / text color pairs:</p>
-	<ul>
-		<li>Background dark / text white</li>
-		<li>Background base / text white</li>
-		<li>Background light / text dark and</li>
-		<li>Background very light / text base</li>
-	</ul>
-	<p>Background / text color pairs should be evaluated for each project based on its specific colors palettes.</p>
-	<p>For elements that require background and text color, write mixins as shown below, and use them to extend the elements' classes.</p>
+    <h1 class="styleguide-page-title">Color Usage Helpers</h1>
+    <h2 class="styleguide-heading">Color Sets</h2>
+    
+    <p>Color Sets are combinations of colors from the project's palette that go together well. We have some
+    easy-to-use helpers for applying the color sets to the styles in your project. Primer also comes with a
+    selection of color sets based on our default palette, but you can customize them to suit each project's
+    needs.</p>
 
-	{% example wide=True %}
-	<!-- Stylus -->
-	primary-dark()
-		background: $palette.primary.dark
-		color: $white
+    <h3>Project Color Sets</h3>
+    <div class="colorset-default"><code>default</code></div>
+    <br/>
+    <div class="colorset-content-attention"><code>content-attention</code></div>
+    <div class="colorset-content-alert"><code>content-alert</code></div>
+    <div class="colorset-content-success"><code>content-success</code></div>
+    <div class="colorset-content-message"><code>content-message</code></div>
+    <br/>
+    <div class="colorset-elem-affirm"><code>elem-affirm</code></div>
+    <div class="colorset-elem-danger"><code>elem-danger</code></div>
+    <div class="colorset-elem-neutral"><code>elem-neutral</code></div>
+    <div class="colorset-elem-disabled"><code>elem-disabled</code></div>
 
-	.primary-dark-element-example
-		primary-dark()
+    <h3>Using Color Sets</h3>
+    {% example %}
+        <!-- DOCS -->
+            In this example we want to style we can put on modals that need to grab the user's
+            attention, so we apply the <code>content-attention</code> color set.
 
-	<!-- HTML -->
-	<div class="primary-dark-element-example">Element with white text on primary dark background</div>
-	{% endexample %}
+            To use any of the project's color sets in an element, use the <code>applyColorSet()</code>
+            helper and just pass the name of the color set you'd like to use.
+        <!-- Stylus -->
+            .important
+                applyColorSet("content-attention")
 
-	{% example wide=True %}
-	<!-- Stylus -->
-	primary()
-		background: $palette.primary.base
-		color: $white
+        <!-- HTML -->
+            <div class="important modal">
+                You've got mail!
+            </div>
+    {% endexample %}
 
-	.primary-element-example
-		primary()
+    {% example %}
+        <!-- DOCS -->
+            Color sets are intended for content or for elements. <em>Content</em> is all the text in
+            a site people are reading, <em>Elements</em> are all the interactive bits they use in your
+            interface.
 
-	<!-- HTML -->
-	<div class="primary-element-example">Element with white text on primary background</div>
-	{% endexample %}
+            Our default color sets are split into these groups, and in your own project you'll probably
+            do the same. Some times, you might want to use a color set for a different purpose. For example,
+            maybe you want an alert message to be something you can interact with, maybe to dismiss it or
+            get more information. You can tell <code>applyColorSet()</code> by passing a second parameter
+            with either <code>"content"</code> or <code>"interactive"</code>.
+        <!-- Stylus -->
+        .alert-msg
+            @extend .message
+            applyColorSet("content-alert", "interactive")
 
-	{% example wide=True %}
-	<!-- Stylus -->
-	primary-light()
-		background: $palette.primary.light
-		color: $palette.primary.dark
+        <!-- HTML -->
+            <div class="alert-msg">
+                Something has gone horribly wrong. Click to see how horrible!
+            </div>
+    {% endexample %}
 
-	.primary-light-element-example
-		primary-light()
+    <h2 class="styleguide-heading">AA Contrast Helpers</h2>
 
-	<!-- HTML -->
-	<div class="primary-light-element-example">Element with primary dark text on primary light background</div>
-	{% endexample %}
+    <p>We take accessibility concerns seriously, and one of the simplest choices you can make towards
+        good accessibility practices is your choice of colors. To that end, Primer includes helpful tools
+        to keep your color contrasts within the guidelines.
+    </p>
 
+    <p>Not all the colors in our palette will meet the guidelines when combined, or simply when placed as
+        background on standard white or black text. This might be especially true when the color palette
+    comes from branding colors we can't change. To help work with these situations three tools are included:</p>
 
-	{% example wide=True %}
-	<!-- Stylus -->
-	primary-very-light()
-		background: $palette.primary.base
-		color: $palette.primary.base
+    <h3>Color Set Contrast Requirements</h3>
 
-	.primary-very-light-element-example
-		primary-very-light()
+    {% example %}
+        <!-- DOCS -->
+        If you try to add a Color Set that doesn't meet the requirements, your Stylus files will fail to compile!
 
-	<!-- HTML -->
-	<div class="primary-very-light-element-example">Element with primary text on primary very light background</div>
-	{% endexample %}
+        You'll get a helpful error that explains why, as well.
+
+        <!-- Stylus -->
+        $colorsets.my-garish-color-set = {
+            bg: magenta,
+            fg: pink,
+        }
+
+        <!-- Console Error Output -->
+        Palette my-garish-color-set AA constrast requirements (4.5). Contrast was 2
+    {% endexample %}
+
+    <h3>The <code>check-aa-contrast()</code> Helper</h3>
+
+    {% example %}
+        <!-- DOCS -->
+        If you need to write your own helpers that deal with colors, you can make sure pairs of colors meet the
+        requirements we expect with the <code>check-aa-contrast()</code> function.
+
+        <!-- Stylus -->
+        .icon
+            if not check-aa-contrast($icon-background-color, $icon-foreground-color)
+                error("Sorry, your icon colors don't have enough contrast!")
+
+            background-color: $icon-background-color
+
+            svg path
+                fill: $icon-foreground-color
+    {% endexample %}
+
+    <h3>The <code>closest-aa-contrast()</code> Helper</h3>
+
+    {% example %}
+        <!-- DOCS -->
+        <p>When your palette has colors that don't meet the requirements, you might want to find the best match
+        to a color that does. Maybe you want your main branding color to be used on buttons, but it doesn't
+        meet the guidelines, so you want the buttons to be as close to that color as possible while still being
+        readable.
+
+        <p>These two buttons have the same text color, but the second one uses <code>closest-aa-contrast()</code>
+        for the background color to ensure readability.
+
+        <!-- Stylus -->
+        $brand-color = grey
+
+        .button-not-aa
+            background-color: $brand-color
+            color: lightgrey
+
+        .button-aa
+            background-color: closest-aa-contrast($brand-color, lightgrey)
+            color: lightgrey
+        
+        <!-- HTML -->
+        <button class="button-not-aa">You can't read me well :-(</button>
+        <br/>&nbsp<br/>
+        <button class="button-aa">I'm pretty easy to read :-)</button>
+    {% endexample %}
+
+    <h3>Customizing the Colorsets</h3>
+
+    <p>The colorsets we show here are just the defaults provided by Primer. They're very helpful
+        to give a new project a clean look from the beginning, but each project will have its own
+        design and theming concerns, so its expected you'll want to change these colors.
+    </p>
+    <p>Here are the ways you can adjust both the palette and the colorsets.</p>
+
+    <h4>Base Colors</h4>
+
+    <p>Primer defines several "base colors" first. These are defined in <code>colors.styl</code>, which
+    defines the following colors:</p>
+
+    <pre><code class="Stylus">$white = #ffffff
+$black = #2B2B28
+$primary-base = #9EC16C
+$secondary-base = #6C7A78
+$accent-base = #117f89
+$success-base = #9EC16C
+$alert-base = #CD3B3B
+$neutral-base = #6C7A78</code></pre>
+
+    <p>The first way you can customize the color palette of your project is by changing these colors.</p>
+
+    <h4>The Color Palette</h4>
+
+    <p>Expanding from the set of Base Colors, the Palette defines ranges of useful variations on those
+        colors. You can see the <a href="..">entire palette</a> on the Colors page.
+    </p>
+
+    <p>Updates to the base colors will be reflected automatically in the palette. However, you can customize
+        those variations if the pre-defined adjustments (lighter and darker versions of your base colors) do
+        not work. The Palette are defined in the <code>$palette</code> variable, with a mapping for every
+        base color, as well as a spectrum of grayscale colors called <code>$palette.grayscale</code>.
+    </p>
+
+    <p>To customize this, find the base colors section and edit the entries to your liking. The sections look
+        like this:
+    </p>
+
+    <pre><code class="Stylus">$palette = {
+    primary : {
+        very-dark : darken($primary-base, 60%),
+        dark : darken($primary-base, 40%),
+        base : $primary-base,
+        light : lighten($primary-base, 55%),
+        very-light : lighten($primary-base, 80%)
+    },
+...</code></pre>
+
+    <h4>Color Sets</h4>
+
+    <p>The final piece of the color configuration are the Color Sets, the defaults of which are documented at the
+        top of this page. Color Sets use colors from the Palette, but pre-select combinations of those colors that
+        can be used for specific semantic purposes, such as a combination of colors for alerts or text and background
+        colors for use in content aside blocks.
+    </p>
+
+    <p>You can use the Color Sets that come with Primer, which will reflect any changes you make to the palette
+        (providing you don't remove or change the name of a palette entry used in a color set). If you'd like to change
+        any, you can do so in the <code>colors.styl</code> file.
+    </p>
+
+    <p>To add a new color set, add an entry to the <code>$colorset</code> variable, which will look like this:</p>
+
+    <pre><code class="Stylus">$colorsets.content-alert = {
+    bg: $palette.alert.very-light,
+    fg: black,
+}</code></pre>
+
+    <p>Later you would use this in any ruleset in your styles as <code class="Stylus">applyColorSet("content-alert")</code>.</p>
+
+    <p>Color Sets have a lot of helpful properties. You are only required to give the Color Set two entries: <code>bg</code> and
+        <code>fg</code>. If the Color Set is used in an interactive element (like a button, via <code>applyColorSet("content-alert", "interactive")</code>)
+        the <code>:hover</code> and <code>:active</code> colors will be generated automatically. However, if you want to select
+        those colors yourself, you can just add them with <code>hover</code> and <code>active</code> entries in the Color Set.
+    </p>
+
+    <p>There are more optional entries you can provide.</p>
+
+    <dt><code>hover</code></dt><dd>The color to use when a pointing device is over the element</dd>
+    <dt><code>active</code></dt><dd>The color to use when the element is interacted with, being clicked or tapped or the enter key pressed when the element is in focus</dd>
+    <dt><code>interactive</code></dt><dd>If the color should be interactive (and defined the above states by default) set this to <code>true</code></dd>
+    <dt><code>skipAA</code></dt><dd><code>true</code> if the Color Set is excempt from AA contrast guidelines</dd>
+    <dt><code>interactive</code></dt><dd>If the color should be interactive (and defined the above states by default) set this to <code>true</code></dd>
+    <dt><code>shadow</code></dt><dd>An optional color to use for a box shadow effect on elements using this color set</dd>
 
 {% endblock %}

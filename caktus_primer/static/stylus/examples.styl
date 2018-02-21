@@ -52,3 +52,67 @@
         gridItem(2, 2, 3, 1)
       footer
         gridItem(2, 3, 3, 1)
+
+for $colorset-name, $colorset in $colorsets
+  .colorset-{$colorset-name}
+    applyColorSet($colorset-name)
+    padding: 0.5em
+    margin: 0.5em 0
+    box-shadow: 0 0 3px lightgrey
+    display: inline-block
+    width: 20%
+
+    code
+      color: getColorSetColor($colorset-name, "fg") !important
+
+.important
+  applyColorSet("content-attention")
+
+.modal
+  padding: 1em
+  margin: 0.5em auto
+  position: relative
+  min-height: 250px
+
+  center()
+  
+  &::before
+    content: "X"
+    position: absolute
+    top: 0.25em
+    right: 0.5em
+
+.message
+  padding: 1em
+  margin: 0.5em auto
+  position: relative
+  min-height: 50px
+
+  center()
+
+.alert-msg
+  @extend .message
+  applyColorSet("content-alert", "interactive")
+
+$brand-color = grey
+
+.button-not-aa
+  button-style({
+    bg: $brand-color,
+    fg: lightgrey,
+    hover: darken($brand-color, 20%),
+    active: lighten($brand-color, 20%),
+    interactive: true,
+  })
+
+.button-aa
+  button-style({
+    bg: closest-aa-contrast($brand-color, lightgrey),
+    fg: lightgrey,
+    hover: darken($brand-color, 20%),
+    active: lighten($brand-color, 20%),
+    interactive: true,
+  })
+
+dt+dd
+  margin-left: 2em
