@@ -12,6 +12,8 @@ export class Dropdown extends React.Component {
             focus: false,
             selected: -1,
         }
+        this.handleClickOutside = this.handleClickOutside.bind(this)
+        this.setWrapperRef = this.setWrapperRef.bind(this)
     }
 
     getClass() {
@@ -25,6 +27,23 @@ export class Dropdown extends React.Component {
     toggle(ev) {
         this.setState({expanded: !this.state.expanded})
         ev.preventDefault()
+    }
+
+    setWrapperRef(node) {
+        this.wrapperRef = node;
+    }
+
+    componentDidMount() {
+        document.addEventListener('mousedown', this.handleClickOutside);
+    }
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.handleClickOutside);
+    }
+
+    handleClickOutside(event) {
+        if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+            this.setState({expanded: false})
+        }
     }
 
     key(ev) {
@@ -67,6 +86,7 @@ export class Dropdown extends React.Component {
         return (
             <div className="primer-dropdown" ariaExpanded="false" ariaHaspopup="true"
                 onKeyDown={(ev)=>this.key(ev)}
+                ref={this.setWrapperRef}
             >
                 <button onClick={()=>this.toggle()}>{this.props.label}</button>
                 {this.state.expanded ?
