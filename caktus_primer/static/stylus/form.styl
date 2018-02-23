@@ -5,34 +5,34 @@ input
     height: 2em
     padding: 1em 0.5em
 
-button-style($bg, $fg)
+button-style($palette)
+    applyColorSet($palette)
     height: 3em
     padding: 1em 2em
     outline: none
     border: 0
     border-radius: 2em
-    background: $bg.base
-    transition: all 0.25s
-    color: $fg
-    box-shadow: 0px 1px 1px $palette.grayscale.dark
+    transition: all 0.5s
 
-    &:hover, &:focus
+    &:hover
         box-shadow: 0px 1px 1px transparent
-        background-color: $bg.dark
         cursor: pointer
-    &:active
-        background: $bg.light
-        box-shadow: 0px 0px 1px $bg.dark
+    
+    &:focus
+        box-shadow: 0px 1px 1px transparent
 
+    &:active
+        transition: all 0s
 
 button, input[type=submit], input[type=button]
-    button-style($palette.primary, white)
+    button-style("elem-affirm")
+    line-height: 1
 
 button.cancel
-    button-style($palette.secondary, white)
+    button-style("elem-neutral")
 
 button.danger
-    button-style($palette.alert, white)
+    button-style("elem-danger")
 
 fieldset
     > *
@@ -101,8 +101,7 @@ fieldset
             display: inline-block
             pointer-events: all
             font-size: inherit
-            line-height: 1
-            padding: 1.2em 2em 0.8em
+            padding: 1.05em 2em 0.8em
 
     legend
         graduated(font-size, $font-size-very-small, $font-size-base, 0)
@@ -158,7 +157,7 @@ fieldset.simple-labels
         margin-top: 2em
 
 select:not([multiple])
-    button-style($palette.primary, white)
+    button-style("elem-affirm")
 
     -webkit-appearance: none
     position: relative

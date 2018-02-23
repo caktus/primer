@@ -18,3 +18,37 @@ primary-light()
 primary-very-light()
 	background: $palette.primary.very-light
 	color: $palette.primary.base
+
+_darken_one_step($color)
+	for i in 1..10
+		$newcolor = darken($color, unit(i, '%'))
+		if $newcolor != $color
+			return $newcolor
+_lighten_one_step($color)
+	for i in 1..10
+		$newcolor = lighten($color, unit(i, '%'))
+		if $newcolor != $color
+			return $newcolor
+
+color-dark-edge($base, $against)
+	if contrast($base, black).ratio <= 1
+		error("No dark edge exists " + contrast($base, black).ratio)
+	else if not check-aa-contrast($base, $against)
+		return color-dark-edge(_darken_one_step($base), $against)
+	else
+		return $base
+
+color-light-edge($base, $against)
+	if not check-aa-contrast($base, $against)
+		return color-light-edge(_lighten_one_step($base), $against)
+	else
+		return $base
+
+check-aa-contrast($base, $against)
+	return contrast($base, $against).ratio >= 4.5
+
+closest-aa-contrast($base, $against)
+	if $base < $against
+		return color-dark-edge($base, $against)
+	else
+		return color-light-edge($base, $against)

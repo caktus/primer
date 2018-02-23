@@ -11,11 +11,29 @@ section.color-gallery
 	.grid
 		border: 0 solid
 
+.swatches-category-wrapper
+	display:grid
+	grid-template-columns: repeat(2, 1fr)
+	grid-template-rows: auto
+	grid-column-gap: 4vw
+	grid-row-gap: 1vw
+	@media (max-width: 960px)
+		grid-template-columns: repeat(1, 1fr)
+
+.swatches-category h3
+	graduated(margin-top, $line-height-small * 1.25, $line-height-base * 1.25)
+
+.swatches-category:nth-child(1) h3,
+.swatches-category:nth-child(2) h3
+	margin-top: 0
+	
+.swatches-category:nth-child(2) h3
+	@media (max-width: 960px)
+		graduated(margin-top, $line-height-small * 1.25, $line-height-base * 1.25)
+
 .swatches
 	display: grid
-	grid-template-columns: 22% 22% 22% 22%
-	grid-auto-rows: minmax(100px, auto);
-	grid-column-gap: 2vw
+	grid-auto-rows: minmax(40px, auto);
 	grid-row-gap: 2vw
 	max-width: 100%
 	margin: 0 auto
@@ -23,13 +41,14 @@ section.color-gallery
 	background-color: $palette.grayscale.white
 
 .swatch
-	padding: 0.5rem
-	border: 1px solid $palette.grayscale.light
+	border: 1px solid $palette.grayscale.very-light
 	list-style: none
 
 .swatch-hue
-	height: 100px
+	height: 4rem
 	padding: 1rem
+	&.large-text
+		graduated(font-size, $font-size-small, $font-size-base, 1)
 
 .swatch-hue p
 	text-align: center
@@ -45,28 +64,57 @@ section.color-gallery
 	font-size: 14px
 	color: $palette.grayscale.mid
 
+.primary-dark-edge
+	background-color: color-edge($palette.primary.base, white)
+	color: white
+	
+.primary-very-dark
+	background-color: $palette.primary.very-dark
+	color: $palette.grayscale.white
+	center()
+
+	&::after
+		content: '"%s"' % (contrast($palette.primary.very-dark, $palette.grayscale.white).ratio)
+
 .primary-dark
 	background-color: $palette.primary.dark
 	color: $palette.grayscale.white
 	center()
-
+	
 .primary
 	background-color: $palette.primary.base
-	color: $palette.grayscale.white
 	center()
+
+.primary-light-edge
+	background-color: color-light-edge($palette.primary.base, $palette.primary.very-dark)
+	color: $palette.primary.very-dark
+	center()
+
+	&::after
+		content '"%s"' % (contrast($palette.primary.base, $palette.primary.very-dark).ratio)
 
 .primary-light
 	background-color: $palette.primary.light
-	color: $palette.primary.dark
+	color: $palette.primary.very-dark
 	center()
 
 .primary-very-light
 	background-color: $palette.primary.very-light
-	color: $palette.primary.dark
+	color: $palette.primary.very-dark
+	center()
+
+.secondary-very-dark
+	background-color: $palette.secondary.very-dark
+	color: $palette.grayscale.white
 	center()
 
 .secondary-dark
 	background-color: $palette.secondary.dark
+	color: $palette.grayscale.white
+	center()
+	
+.secondary-dark-edge
+	background-color: $palette.secondary.dark-edge
 	color: $palette.grayscale.white
 	center()
 
@@ -77,12 +125,17 @@ section.color-gallery
 
 .secondary-light
 	background-color: $palette.secondary.light
-	color: $palette.secondary.dark
+	color: $palette.secondary.very-dark
 	center()
 
 .secondary-very-light
 	background-color: $palette.secondary.very-light
 	color: $palette.secondary.dark
+	center()
+
+.accent-very-dark
+	background-color: $palette.accent.very-dark
+	color: $palette.grayscale.white
 	center()
 
 .accent-dark
@@ -97,14 +150,39 @@ section.color-gallery
 
 .accent-light
 	background-color: $palette.accent.light
-	color: $palette.accent-dark
+	color: $palette.accent.very-dark
 	center()
 
 .accent-very-light
 	background-color: $palette.accent.very-light
-	color: $palette.accent-dark
+	color: $palette.accent.dark
 	center()
 
+.alert-very-dark
+	background-color: $palette.alert.very-dark
+	color: $palette.grayscale.white
+	center()
+
+.alert-dark
+	background-color: $palette.alert.dark
+	color: $palette.grayscale.white
+	center()
+
+.alert
+	background-color: $palette.alert.base
+	color: $palette.grayscale.white
+	center()
+
+.alert-light
+	background-color: $palette.alert.light
+	color: $palette.alert.very-dark
+	center()
+
+.alert-very-light
+	background-color: $palette.alert.very-light
+	color: $palette.alert.dark
+	center()
+	
 .black
 	background-color: $palette.grayscale.black
 	color: $palette.grayscale.white
@@ -122,106 +200,82 @@ section.color-gallery
 
 .grayscale-mid
 	background-color: $palette.grayscale.mid
+	color: $palette.grayscale.black
 	center()
 
 .grayscale-light
 	background-color: $palette.grayscale.light
+	color: $palette.grayscale.very-dark
 	center()
 
 .grayscale-very-light
 	background-color: $palette.grayscale.very-light
+	color: $palette.grayscale.very-dark
 	center()
 
 .white
 	background-color: $palette.grayscale.white
+	color: $palette.grayscale.black
 	center()
-
-.success-dark
-	background-color: $palette.success.dark
-	color: $palette.grayscale.white
-	center()
-
-.success
-	background-color: $palette.success.base
-	color: $palette.grayscale.white
-	center()
-
-.success-light
-	background-color: $palette.success.light
-	color: $palette.success-dark
-	center()
-
-.success-very-light
-	background-color: $palette.success.very-light
-	color: $palette.success-dark
-	center()
-
-.alert-dark
-	background-color: $palette.alert.dark
-	color: $palette.grayscale.white
-	center()
-
-.alert
-	background-color: $palette.alert.base
-	color: $palette.grayscale.white
-	center()
-
-.alert-light
-	background-color: $palette.alert.light
-	color: $palette.alert-dark
-	center()
-
-.alert-very-light
-	background-color: $palette.alert.very-light
-	color: $palette.alert-dark
-	center()
-
-.neutral-dark
-	background-color: $palette.neutral.dark
-	color: $palette.grayscale.white
-	center()
-
-.neutral
-	background-color: $palette.neutral.base
-	color: $palette.grayscale.white
-	center()
-
-.neutral-light
-	background-color: $palette.neutral.light
-	color: $palette.neutral-dark
-	center()
-
-.neutral-very-light
-	background-color: $palette.neutral.very-light
-	color: $palette.neutral-dark
-	center()
-
-.disabled-light
-	background-color: $palette.disabled.light
-	color: $palette.disabled.mid
-	center()
-
-.disabled-very-light
-	background-color: $palette.disabled.very-light
-	color: $palette.disabled.light
-	center()
-
-
-// Styles for Color Usage Page
-div[class*=-element-example]
-	dislpay: flex
-	border-radius: 2px
-	center()
-	height: 88px;
-
-.primary-dark-element-example
-	primary-dark()
 	
-.primary-element-example
-	primary()
+.success-icon,
+.alert-icon
+	margin-right: 0.5rem
+	graduated(font-size, $font-size-small, $font-size-base, 2)
+
+.success-icon
+	color: $palette.primary.base
 	
-.primary-light-element-example
-	primary-light()
+.alert-icon
+	color: $palette.alert.base	
+
+.success-message
+	background-color: $palette.primary.very-light
+	color: $palette.primary.very-dark
+	text-align: center
+	padding: 1.5rem 2rem
 	
-.primary-very-light-element-example
-	primary-very-light()
+.attention-grabber-message
+	background-color: $palette.accent.very-light
+	color: $palette.accent.dark
+	text-align: center
+	padding: 1.5rem 2rem
+	
+.alert-message
+	applyColorSet("content-alert")
+	text-align: center
+	padding: 1.5rem 2rem
+
+.neutral-message
+	background-color: $palette.grayscale.very-light
+	color: $palette.grayscale.very-dark
+	text-align: center
+	padding: 1.5rem 2rem
+	
+.affirmative-interactive-element
+	applyColorSet("elem-affirm")
+	text-align: center
+	height: 3rem
+	padding: 1em 2em
+	line-height: 1
+	
+.neutral-interactive-element
+	applyColorSet("elem-neutral")
+	text-align: center
+	height: 3rem
+	padding: 1em 2em
+	line-height: 1
+	
+.destructive-interactive-element
+	applyColorSet("elem-danger")
+	text-align: center
+	height: 3rem
+	padding: 1em 2em
+	line-height: 1
+	
+.disabled-interactive-element
+	applyColorSet("elem-disabled")
+	text-align: center
+	height: 3rem
+	padding: 1em 2em
+	line-height: 1

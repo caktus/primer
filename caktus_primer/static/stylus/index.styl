@@ -26,7 +26,7 @@
 	font-size: 100%
 
 body
-	color: $palette.grayscale.black
+	applyColorSet("default")
 
 section
 	width: 100%
@@ -42,10 +42,10 @@ section
 		padding: 1em
 
 a
-	color: $palette.accent.light
+	color: $palette.accent.base
 	&:hover,
 	&:focus
-		color: $palette.accent.base
+		color: $palette.accent.very-dark
 
 generate-grid(columns)
 	display grid

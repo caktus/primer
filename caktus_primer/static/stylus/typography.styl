@@ -113,9 +113,10 @@ h3,
 h2,
 h1
 	font-weight: $font-weight.normal
-	graduated(margin-top, $line-height-small * 1.25, $line-height-base * 1.25)
+	// graduated(margin-top, $line-height-small * 1.25, $line-height-base * 1.25)
+	graduated(margin-top, $line-height-small * 1.75, $line-height-base * 1.75)
 	margin-bottom: 0
-	+ p
+	+ *
 		graduated(margin-top, $line-height-small * 0.25, $line-height-base * 0.25)
 
 h6,
@@ -125,6 +126,9 @@ h4
 
 p
 	graduated(margin-bottom, $line-height-small * 1.25, $line-height-base * 1.25)
+
+pre + p
+	graduated(margin-top, $line-height-small * 1.25, $line-height-base * 1.25)
 
 blockquote
 	padding-left: 1rem

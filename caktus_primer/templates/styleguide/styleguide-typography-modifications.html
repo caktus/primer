@@ -5,7 +5,7 @@
 {% block styleguide_content %}
 <h1 class="styleguide-page-title"">Typography Modifications</h1>
 
-<h2 class="styleguide-heading">Modifying font sizes with HTML tag selectors</h2>
+<h2 class="styleguide-heading">Modifying Font Sizes with HTML Tag Selectors</h2>
 
 <p>A semantic <code>&lt;h2&gt;</code> heading in a sidebar may have to be smaller than the default font size of <code>&lt;h2&gt;</code> derived from the modular scale. Text in the footer may have to be smaller than the default <code>&lt;p&gt;</code> font size.
 </p>
@@ -13,63 +13,62 @@
 <p>Modify font sizes by writing HTML tag selectors before resorting to writing custom classes.</p>
 
 {% example wide=True %}
-<!-- DOCS -->
-Modified font size of an h2 heading in a sidebard.
+	<!-- DOCS -->
+	Modified font size of an h2 heading in a sidebard.
 
-<!-- Stylus -->
-aside h2
-	graduated(font-size, $font-size-small, $font-size-base, 0)
-	font-weight: $font-weight.bold
+	<!-- Stylus -->
+	aside h2
+		graduated(font-size, $font-size-small, $font-size-base, 0)
+		font-weight: $font-weight.bold
 
-<!-- HTML -->
-<aside>
-	<h2>Lorem Mollis Dapibus</h2>
-</aside>
+	<!-- HTML -->
+	<aside>
+		<h2>Lorem Mollis Dapibus</h2>
+	</aside>
 {% endexample %}
 
 {% example wide=True %}
-<!-- DOCS -->
-Modified font size of a paragraph in a footer.
+	<!-- DOCS -->
+	Modified font size of a paragraph in a footer.
 
-<!-- Stylus -->
-footer p
-	font-size: $font-size-small
+	<!-- Stylus -->
+	footer p
+		font-size: $font-size-small
 
-<!-- HTML -->
-<footer>
-	<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
-</footer>
+	<!-- HTML -->
+	<footer>
+		<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
+	</footer>
 {% endexample %}
 
-<h2 class="styleguide-heading">Modifying font sizes with custom semantic classes</h2>
+<h2 class="styleguide-heading">Modifying Font Sizes with Custom Semantic Classes</h2>
 
 <p>If writing semantic HTML selectors is not sufficient to overwrite the default font sizes of typographic elements, write custom semantic classes.</p>
 
 {% example wide=True %}
-<!-- DOCS -->
-A custom semantic class to make the heading in the hero larger than the default <h1> font size.
+	<!-- DOCS -->
+	A custom semantic class to make the heading in the hero larger than the default <h1> font size.
 
-<!-- Stylus -->
-.home-hero-heading
-	graduated(font-size, $font-size-small, $font-size-base, 5)
-	graduated(line-height, $line-height-small, $line-height-small, 5)
+	<!-- Stylus -->
+	.home-hero-heading
+		graduated(font-size, $font-size-small, $font-size-base, 5)
+		graduated(line-height, $line-height-small, $line-height-small, 5)
 
-<!-- HTML -->
-<h1 class="home-hero-heading">Mollis Sem Bibendum</h1>
-
+	<!-- HTML -->
+	<h1 class="home-hero-heading">Mollis Sem Bibendum</h1>
 {% endexample %}
 
 {% example wide=True %}
-<!-- DOCS -->
-A custom semantic class to make the tagline in the hero larger than the default <p> font size.
+	<!-- DOCS -->
+	A custom semantic class to make the tagline in the hero larger than the default <p> font size.
 
-<!-- Stylus -->
-.home-hero-tagline
-	graduated(font-size, $font-size-small, $font-size-base, 1)
-	graduated(line-height, $line-height-base, $line-height-base, 1)
+	<!-- Stylus -->
+	.home-hero-tagline
+		graduated(font-size, $font-size-small, $font-size-base, 1)
+		graduated(line-height, $line-height-base, $line-height-base, 1)
 
-<!-- HTML -->
-<p class="home-hero-tagline">Cras mattis consectetur purus sit amet fermentum.</p>
+	<!-- HTML -->
+	<p class="home-hero-tagline">Cras mattis consectetur purus sit amet fermentum.</p>
 {% endexample %}
 
 {% endblock %}

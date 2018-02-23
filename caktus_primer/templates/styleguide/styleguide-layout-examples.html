@@ -7,11 +7,11 @@
 <h1 class="styleguide-page-title">Layout Examples</h1>
 <p>Here are some examples of how you can use our grid system for your various layout needs.</p>
 <p>Some best practices to keep in mind:</p>
-<ol>
+<ul>
   <li>Prefer percentages or viewport units over pixel units.</li>
   <li>Prefer mobile-first approach when introducing breakpoints.</li>
   <li>Prefer HTML5 elements over generic div elements.</li>
-</ol>
+</ul>
 <h2 class="styleguide-heading">Hero Full-width, Two Column Example</h2>
 
 {% example wide=True %}
@@ -72,7 +72,7 @@
   </section>
 {% endexample %}
 
-<h2 class="styleguide-heading">Hero Full-width, Reverse Column example</h2>
+<h2 class="styleguide-heading">Hero Full-width, Reverse Column Example</h2>
 
 {% example wide=True %}
   <!-- DOCS -->
@@ -124,7 +124,7 @@
   </section>
 {% endexample %}
 
-<h2 class="styleguide-heading">Hero Full-width, Three Column example</h2>
+<h2 class="styleguide-heading">Hero Full-width, Three Column Example</h2>
 
 {% example wide=True %}
   <!-- DOCS -->
@@ -199,8 +199,6 @@
   @media all and (min-width:$maxScreenWidth)
     .page-container
       panels(row, 0.33, 0.66)
-
-  <!-- HTML -->
 {% endexample %}
 
 {% endblock %}

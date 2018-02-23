@@ -12,60 +12,161 @@ $accent-base = #117f89
 $success-base = #9EC16C
 $alert-base = #CD3B3B
 $neutral-base = #6C7A78
-$disabled-base = #2B2B28
 
 // Palettes
 
 $palette = {
 	primary : {
+		very-dark : darken($primary-base, 60%),
 		dark : darken($primary-base, 40%),
 		base : $primary-base,
-		light : lighten($primary-base, 40%),
+		light : lighten($primary-base, 55%),
 		very-light : lighten($primary-base, 80%)
 	},
 	secondary : {
-		dark : darken($secondary-base, 40%),
+		very-dark : darken($secondary-base, 50%),
+		dark : darken($secondary-base, 30%),
 		base : $secondary-base,
 		light : lighten($secondary-base, 40%),
 		very-light : lighten($secondary-base, 80%)
 	},
 	accent : {
-		dark : darken($accent-base, 40%),
+		very-dark : darken($accent-base, 50%),
+		dark : darken($accent-base, 30%),
 		base : $accent-base,
 		light : lighten($accent-base, 40%),
-		very-light : lighten($accent-base, 80%)
+		very-light : lighten($accent-base, 85%)
+	},
+	alert : {
+		very-dark : darken($alert-base, 40%),
+		dark : darken($alert-base, 20%),
+		base : $alert-base,
+		light : lighten($alert-base, 50%),
+		very-light : lighten($alert-base, 90%)
 	},
 	grayscale : {
 		black: $black,
-		very-dark: lighten($black, 20%),
-		dark : lighten($black, 40%),
-		mid : lighten($black, 60%),
-		light : lighten($black, 80%),
+		dark : lighten($black, 30%),
+		mid : lighten($black, 70%),
+		light : lighten($black, 85%),
 		very-light : lighten($black, 95%),
 		white: $white
-	},
-	success : {
-		dark : darken($success-base, 40%),
-		base : $success-base,
-		light : lighten($success-base, 40%),
-		very-light : lighten($success-base, 80%)
-	},
-	alert : {
-		dark : darken($alert-base, 40%),
-		base : $alert-base,
-		light : lighten($alert-base, 40%),
-		very-light : lighten($alert-base, 80%)
-	},
-	neutral : {
-		dark : darken($neutral-base, 40%),
-		base : $neutral-base,
-		light : lighten($neutral-base, 40%),
-		very-light : lighten($neutral-base, 80%)
-		},
-	disabled : {
-		dark : lighten($black, 40%),
-		mid : lighten($black, 60%),
-		light : lighten($black, 80%),
-		very-light : lighten($black, 95%)
 	}
+	success : {
+		very-dark : darken($secondary-base, 50%),
+		dark : darken($secondary-base, 30%),
+		dark-edge : darken($secondary-base, 1%), // this is the dark edge color for secondary
+		base : $secondary-base,
+		light : lighten($secondary-base, 40%),
+		very-light : lighten($secondary-base, 80%)
+	},
 }
+
+// Pre-made Color Sets
+
+$colorsets = {}
+
+$colorsets.default = {
+	bg: $white,
+	fg: $black,
+	shadow: none,
+}
+
+// Content Color Sets
+$colorsets.content-attention = {
+	bg: $palette.accent.very-light,
+	fg: black,
+	shadow: none,
+}
+$colorsets.content-success = {
+	bg: $palette.primary.very-light,
+	fg: black,
+	shadow: none,
+}
+$colorsets.content-alert = {
+	bg: $palette.alert.very-light,
+	fg: black,
+}
+$colorsets.content-message = {
+	bg: $palette.grayscale.light,
+	fg: black,
+	shadow: none,
+}
+
+// Interactive Color Sets
+$colorsets.elem-affirm = {
+	bg: color-dark-edge($palette.primary.base, white),
+	fg: white,
+	shadow: $palette.primary.light,
+	active: $palette.primary.base,
+	interactive: true,
+}
+$colorsets.elem-disabled = {
+	bg: $palette.grayscale.light,
+	fg: $palette.grayscale.mid,
+	shadow: $palette.grayscale.light,
+	interactive: false,
+	skipAA: true,
+}
+$colorsets.elem-neutral = {
+	bg: $palette.grayscale.dark,
+	fg: white,
+	shadow: $palette.grayscale.light,
+	active: $palette.grayscale.mid,
+	interactive: true,
+}
+$colorsets.elem-danger = {
+	bg: $palette.alert.base,
+	fg: white,
+	shadow: $palette.grayscale.light,
+	interactive: true,
+}
+
+$csSkipAA = {}
+for $csName, $cs in $colorsets
+	if $cs['skipAA']
+		$csSkipAA[$csName] = true
+	else
+		$csSkipAA[$csName] = false
+
+_getColorSetName(colorset)
+	if type(colorset) == "string"
+		return colorset
+	for name, _colorset in $colorsets
+		if colorset is _colorset
+			return name
+
+getColorSetColor(colorset, cname)
+	if typeof(colorset) == "string"
+		return getColorSetColor($colorsets[colorset], cname)
+
+	if $colorsets and colorset
+		$$p = colorset
+		if cname == "hover" and !$$p.hover
+			return darken($$p['bg'], 20%)
+		else if cname == "active" and !$$p.active
+			return lighten($$p['bg'], 10%)
+		else if cname == "shadow" and !$$p.shadow
+			return none
+		else if cname in colorset
+			return colorset[cname]
+	
+	error("Could not find color '" + cname + "' from colorset '" + _getColorSetName(colorset) + "' " + (cname in colorset))
+
+applyColorSet(pname, mode="content")
+	background-color: getColorSetColor(pname, "bg")
+	color: getColorSetColor(pname, "fg")
+	box-shadow: 0 0 3px getColorSetColor(pname, "shadow")
+	transition: all 0.5s
+
+	if not check-aa-contrast(getColorSetColor(pname, "bg"), getColorSetColor(pname, "fg"))
+		$skipAA = bool($csSkipAA[_getColorSetName(pname)])
+		if not $skipAA
+			error("Palette "+pname+" fails AA constrast requirements (4.5). Contrast was " + contrast(getColorSetColor(pname, "bg"), getColorSetColor(pname, "fg")).ratio)
+
+	if mode == "interactive" or 'interactive' in pname or $colorsets[pname].interactive
+		&:focus, &:hover
+			background-color: getColorSetColor(pname, "hover")
+		&:active
+			background-color: getColorSetColor(pname, "active")
+			transition: all 0s
