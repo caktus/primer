@@ -54,12 +54,11 @@
             get more information. You can tell <code>applyColorSet()</code> by passing a second parameter
             with either <code>"content"</code> or <code>"interactive"</code>.
         <!-- Stylus -->
-        .alert-msg
-            @extend .message
+        .alert
             applyColorSet("content-alert", "interactive")
 
         <!-- HTML -->
-            <div class="alert-msg">
+            <div class="alert message">
                 Something has gone horribly wrong. Click to see how horrible!
             </div>
     {% endexample %}
@@ -115,13 +114,10 @@
 
     {% example %}
         <!-- DOCS -->
-        <p>When your palette has colors that don't meet the requirements, you might want to find the best match
+        When your palette has colors that don't meet the requirements, you might want to find the best match
         to a color that does. Maybe you want your main branding color to be used on buttons, but it doesn't
         meet the guidelines, so you want the buttons to be as close to that color as possible while still being
         readable.
-
-        <p>These two buttons have the same text color, but the second one uses <code>closest-aa-contrast()</code>
-        for the background color to ensure readability.
 
         <!-- Stylus -->
         $brand-color = grey
@@ -136,7 +132,6 @@
         
         <!-- HTML -->
         <button class="button-not-aa">You can't read me well :-(</button>
-        <br/>&nbsp<br/>
         <button class="button-aa">I'm pretty easy to read :-)</button>
     {% endexample %}
 
