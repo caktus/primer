@@ -69,6 +69,7 @@ $colorsets = {}
 $colorsets.default = {
 	bg: $white,
 	fg: $black,
+	link: color-dark-edge($palette.primary.base, $white)
 	shadow: none,
 }
 
@@ -82,10 +83,12 @@ $colorsets.content-success = {
 	bg: $palette.primary.very-light,
 	fg: black,
 	shadow: none,
+	link: color-dark-edge($palette.primary.base, $palette.primary.very-light),
 }
 $colorsets.content-alert = {
 	bg: $palette.alert.very-light,
-	fg: black,
+	fg: $black,
+	link: #dd7272,
 }
 $colorsets.content-message = {
 	bg: $palette.grayscale.light,
@@ -151,6 +154,8 @@ getColorSetColor(colorset, cname)
 		else if cname in colorset
 			return colorset[cname]
 	
+	if _getColorSetName(colorset) != "default"
+		return getColorSetColor("default", cname)
 	error("Could not find color '" + cname + "' from colorset '" + _getColorSetName(colorset) + "' " + (cname in colorset))
 
 applyColorSet(pname, mode="content")
@@ -162,7 +167,7 @@ applyColorSet(pname, mode="content")
 	if not check-aa-contrast(getColorSetColor(pname, "bg"), getColorSetColor(pname, "fg"))
 		$skipAA = bool($csSkipAA[_getColorSetName(pname)])
 		if not $skipAA
-			error("Palette "+pname+" fails AA constrast requirements (4.5). Contrast was " + contrast(getColorSetColor(pname, "bg"), getColorSetColor(pname, "fg")).ratio)
+			error("Palette "+pname+" (fg) fails AA constrast requirements (4.5). Contrast was " + contrast(getColorSetColor(pname, "bg"), getColorSetColor(pname, "fg")).ratio)
 
 	if mode == "interactive" or 'interactive' in pname or $colorsets[pname].interactive
 		&:focus, &:hover
@@ -170,3 +175,15 @@ applyColorSet(pname, mode="content")
 		&:active
 			background-color: getColorSetColor(pname, "active")
 			transition: all 0s
+	else
+		a
+			text-decoration: none
+			border-style: dotted
+			border-width: 1px
+			border-color: transparent
+			border-bottom: 1px dotted
+			box-sizing: border-box
+		a, a:active, a:focus, a:hover
+			color: getColorSetColor(pname, "link")
+		a:hover
+			border: 1px dotted

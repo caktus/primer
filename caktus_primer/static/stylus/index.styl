@@ -26,7 +26,8 @@
 	font-size: 100%
 
 body
-	applyColorSet("default")
+	{join(",", $content-tags)}
+		applyColorSet("default")
 
 section
 	width: 100%
