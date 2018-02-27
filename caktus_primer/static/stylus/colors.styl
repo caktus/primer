@@ -105,7 +105,7 @@ $colorsets.elem-disabled = {
 	bg: $palette.grayscale.light,
 	fg: $palette.grayscale.mid,
 	shadow: $palette.grayscale.light,
-	interactive: true,
+	interactive: false,
 	skipAA: true,
 }
 $colorsets.elem-neutral = {
@@ -164,7 +164,7 @@ applyColorSet(pname, mode="content")
 		if not $skipAA
 			error("Palette "+pname+" fails AA constrast requirements (4.5). Contrast was " + contrast(getColorSetColor(pname, "bg"), getColorSetColor(pname, "fg")).ratio)
 
-	if mode == "interactive" or $colorsets[pname].interactive
+	if mode == "interactive" or $colorsets[pname].interactive or $colorsets[pname].interactive
 		&:focus, &:hover
 			background-color: getColorSetColor(pname, "hover")
 		&:active
