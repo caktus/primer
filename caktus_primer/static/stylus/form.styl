@@ -17,7 +17,7 @@ button-style($palette)
     &:hover
         box-shadow: 0px 1px 1px transparent
         cursor: pointer
-    
+
     &:focus
         box-shadow: 0px 1px 1px transparent
 
@@ -34,7 +34,8 @@ button.cancel
 button.danger
     button-style("elem-danger")
 
-fieldset
+fieldset,
+fieldset div
     > *
         display: block
 
@@ -57,10 +58,13 @@ fieldset
         width: 100%
         max-width: 20em
         border-radius: 0px
+        transition: border 0.4s
+
+        &:focus
+            border-bottom: 1px solid $palette.accent.base
 
         &.input-error
             border-bottom: 1px solid $palette.alert.base
-
 
     input[type=submit], input[type=button], input[type=file]
         graduated(margin-top, $line-height-small * 1.25, $line-height-base * 1.25)
@@ -83,9 +87,18 @@ fieldset
         pointer-events: none
         transition: all 0.2s
 
-    input.populated:not([type=checkbox]):not([type=radio]):not([type=file]) + label, input:focus:not([type=checkbox]):not([type=radio]):not([type=file]) + label, input[readonly] + label,input[disabled] + label, input[readonly] + label
+    input.populated:not([type=checkbox]):not([type=radio]):not([type=file]) + label,
+    input:focus:not([type=checkbox]):not([type=radio]):not([type=file]) + label,
+    input[readonly] + label,
+    input[disabled] + label
         graduated(font-size, $font-size-very-small, $font-size-small, 0)
         top: -3.5em
+
+    input:focus:not([type=checkbox]):not([type=radio]):not([type=file]) + label
+        color: $palette.accent.base
+
+    input.input-error:not([type=checkbox]):not([type=radio]):not([type=file]) + label
+        color: $palette.alert.base
 
     input[type=file]
         width: 0.1px
