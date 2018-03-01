@@ -1,0 +1,179 @@
+{% extends "styleguide/styleguide.html" %}
+
+{% load styleguide_tags %}
+<head>
+    {% block extra-css %}
+    <style>
+        dialog {
+            position: relative;
+            padding: 2em 2em;
+            border: none;
+            box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        dialog::backdrop {
+            background: #2B2B28;
+            opacity: 0.7;
+        }
+
+        button[aria-label="close"] {
+            position: absolute;
+            height: 44pt; /* Per Apple's HIG we should maintain a tappable area of 44pt by 44pt */
+            width: 44pt;
+            top: 0;
+            right: 0;
+            color: black;
+            border: none;
+            background: transparent;
+            box-shadow: none;
+            font-weight: bold;
+        }
+        
+        button[aria-label="close"]:hover {
+            color: red;
+        }
+
+    </style>
+    {% endblock %}
+</head>
+{% block styleguide_content %}
+    <h1 class="styleguide-page-title">Modals</h1>
+    <p>HTML 5.2 now includes a <code>{% filter force_escape %}<dialog>{% endfilter %}</code> element we can leverage to create modals, or an absolutely positioned and horizontally centered content box that appears on top of other content on a page.</p>
+    <p>The purpose of a modal can be varied; whether it serves as an alert message or a form, we use modals to direct a user's attention at whatever message or task is at hand.</p>
+    <p>There are 3 browser API methods we can now use with <code>{% filter force_escape %}<dialog>{% endfilter %}</code> elements: </p>
+        <ul>
+            <li><code>{% filter force_escape %}showModal(){% endfilter %}</code> This method will display the element as a modal. It will be displayed at the center of the page by default, and it resides in the top layer, which prevents interference by z-index, relative position and overflow of the parent element.</li>
+            <li><code>{% filter force_escape %}show(){% endfilter %}</code> This method reveals the element in accordance to its position in the DOM flow.</li>
+            <li><code>{% filter force_escape %}close(){% endfilter %}</code> This method will close a dialog. You can optionally pass in a <code>{% filter force_escape %}returnValue{% endfilter %}</code> parameter which will update the returnValue property on the dialog.</code></li>
+        </ul>
+    <p>Additionally, there is a new CSS pseudo class called <code>{% filter force_escape %}::backdrop{% endfilter %}</code> which allows us to easily style our modal backdrops. See the documentation <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/::backdrop" target="_blank">here</a>.</p>
+
+    <p>For further reading on the <code>{% filter force_escape %}<dialog>{% endfilter %}</code> element, see <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog" target="_blank">here</a>.</p>
+    <p>To ensure browser compatibility, we are including a <a href="https://github.com/GoogleChrome/dialog-polyfill" target="_blank">polyfill</a> so that this approach works on all browsers, including IE 9.</p>
+    <h2 class="styleguide-heading">Small Modals</h2>
+    <div id="smallDialog">
+        <button type="button" class="btn-open" id="modal_open" aria-label="open">Open Small Modal</button>
+        <dialog>
+            <h3>Small Modal Window</h3>
+            <p>Morbi quis nibh quam. Sed ipsum lacus, ultrices at rutrum in, dapibus in velit. Nunc dignissim, arcu in lacinia tempus, eros mi eleifend massa, ut elementum ante nulla id leo.</p>
+            <button type="button" class="btn-close" id="modal_close" aria-label="close">X</button>
+        </dialog>
+    </div>
+
+    <h2 class="styleguide-heading">Medium Modals</h2>
+    <div id="mediumDialog">
+        <button type="button" class="btn-open" id="modal_open" aria-label="open">Open Medium Modal</button>
+        <dialog>
+            <h3>Medium Modal Window</h3>
+            <p>Morbi quis nibh quam. Sed ipsum lacus, ultrices at rutrum in, dapibus in velit. Nunc dignissim, arcu in lacinia tempus, eros mi eleifend massa, ut elementum ante nulla id leo.</p>
+            <button type="button" class="btn-close" id="modal_close" aria-label="close">X</button>
+        </dialog>
+    </div>
+
+    <h2 class="styleguide-heading">Large Modals</h2>
+    <div id="largeDialog">
+        <button type="button" class="btn-open" id="modal_open" aria-label="open">Open Large Modal</button>
+        <dialog>
+            <h3>Large Modal Window</h3>
+            <p>Morbi quis nibh quam. Sed ipsum lacus, ultrices at rutrum in, dapibus in velit. Nunc dignissim, arcu in lacinia tempus, eros mi eleifend massa, ut elementum ante nulla id leo.</p>
+            <p>Phasellus ultricies varius quam. Suspendisse fringilla massa sapien, vel ornare diam bibendum nec. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+            <button type="button" class="btn-close" id="modal_close" aria-label="close">X</button>
+        </dialog>
+    </div>
+
+    {% example wide=True %}
+        <!-- HTML -->
+        <div id="mediumDialog">
+            <button type="button" class="btn-open" id="modal_open" aria-label="open">Open Medium Modal</button>
+            <dialog>
+                <h3>Medium Modal Window</h3>
+                <p>Morbi quis nibh quam. Sed ipsum lacus, ultrices at rutrum in, dapibus in velit. Nunc dignissim, arcu in lacinia tempus, eros mi eleifend massa, ut elementum ante nulla id leo.</p>
+                <button type="button" class="btn-close" id="modal_close" aria-label="close">X</button>
+            </dialog>
+        </div>
+        {% endexample %}
+{% endblock %}
+
+{% block extra-js %}
+<script type="text/javascript">
+'use strict'
+
+class Modal {
+    constructor(id) {
+        this.name = 'Modal'
+        this.options = {}
+        this.container = document.getElementById(id) || null
+        if (this.container) {
+            this.openTarget = this.container.querySelector('[aria-label="open"]')
+            this.dialogTarget = this.container.getElementsByTagName('dialog')[0]
+            this.closeTarget = this.container.querySelector('[aria-label="close"]')
+        }
+        else {
+            return
+        }
+        // todo: add event handlers for other forms of click interaction like touchstart, etc.
+        this.openTarget.addEventListener('click', (e) => { this.handleClick(e) })
+        this.closeTarget.addEventListener('click', (e) => { this.closeModal(e) })
+    }
+
+    handleClick() {
+        this.dialogTarget.showModal()
+    }
+
+    closeModal() {
+        this.dialogTarget.close()
+    }
+    
+}
+
+class LargeModal extends Modal {
+    constructor(id) {
+        super(id)
+        this.options['size'] = '80%'
+        this.name = 'LargeModal'
+        this.dialogTarget.style.width = this.options['size']
+    }
+}
+
+class MediumModal extends Modal {
+    constructor(id) {
+        super(id)
+        this.options['size'] = '50%'
+        this.name = 'MediumModal'
+        this.dialogTarget.style.width = this.options['size']
+    }
+}
+
+class SmallModal extends Modal {
+    constructor(id) {
+        super(id)
+        this.options['size'] = '30%'
+        this.name = 'MediumModal'
+        this.dialogTarget.style.width = this.options['size']
+    }
+}
+
+
+let largeModal = new LargeModal('largeDialog')
+let mediumModal = new MediumModal('mediumDialog')
+let smallModal = new SmallModal('smallDialog')
+
+</script>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
