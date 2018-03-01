@@ -10,7 +10,7 @@
             border: none;
             box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.1);
         }
-        
+
         dialog::backdrop {
             background: #2B2B28;
             opacity: 0.7;
@@ -28,7 +28,7 @@
             box-shadow: none;
             font-weight: bold;
         }
-        
+
         button[aria-label="close"]:hover {
             color: red;
         }
@@ -81,6 +81,26 @@
         </dialog>
     </div>
 
+    <h2 class="styleguide-heading">Modal with a Form</h2>
+        <p>Your modal can contain a variety of things, including forms!</p>
+        <div id="formDialog">
+            <button type="button" class="btn-open" id="modal_open" aria-label="open">Open Form Modal</button>
+            <dialog>
+                <h3>Modal Form Title</h3>
+                <form>
+                    <fieldset>
+                        {% for field in create_user_form %}
+                            {{ field }}
+                            {{ field.label_tag }}
+                        {% endfor %}
+                        <input type=submit value="Save" formnovalidate>
+                    </fieldset>
+                </form>
+                <button type="button" class="btn-close" id="modal_close" aria-label="close">X</button>
+            </dialog>
+        </div>
+
+    <h2 class="styleguide-heading">Usage</h2>
     {% example wide=True %}
         <!-- HTML -->
         <div id="mediumDialog">
@@ -92,6 +112,7 @@
             </dialog>
         </div>
         {% endexample %}
+
 {% endblock %}
 
 {% block extra-js %}
@@ -125,7 +146,7 @@ class Modal {
         this.dialogTarget.close()
         document.body.style.overflow = '';
     }
-    
+
 }
 
 class LargeModal extends Modal {
@@ -159,6 +180,7 @@ class SmallModal extends Modal {
 let largeModal = new LargeModal('largeDialog')
 let mediumModal = new MediumModal('mediumDialog')
 let smallModal = new SmallModal('smallDialog')
+let formModal = new MediumModal('formDialog')
 
 </script>
 {% endblock %}
