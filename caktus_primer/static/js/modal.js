@@ -1,5 +1,3 @@
-'use strict'
-
 let clickEvents = ['click', 'mousedown', 'touchstart', 'dblclick']
 
 

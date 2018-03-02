@@ -9,3 +9,22 @@ dialog
         position: absolute
         top: 0
         right: 0
+
+    button[aria-label="close"]
+        position: absolute;
+        height: 44pt /* Per Apple's HIG we should maintain a tappable area of 44pt by 44pt */
+        width: 44pt
+        top: 0
+        right: 0
+        color: black
+        border: none
+        background: transparent
+        box-shadow: none
+        font-weight: bold
+
+
+        button[aria-label="close"]:hover
+            color: red
+
+
+

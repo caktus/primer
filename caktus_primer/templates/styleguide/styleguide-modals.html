@@ -122,7 +122,6 @@
 
 {% block extra-js %}
 <script type="text/javascript">
-'use strict'
 
 let clickEvents = ['click', 'mousedown', 'touchstart', 'dblclick']
 
@@ -141,12 +140,13 @@ class Modal {
             return
         }
 
+        // Attach event listeners to our click events to handle opening and closing the modal window
         clickEvents.forEach((n) => (this.openTarget.addEventListener(n, (e) => { this.handleClick(e)})))
         
         clickEvents.forEach((n) => (this.closeTarget.addEventListener(n, (e) => { this.closeModal(e)})))
         
+        // Escape key
         document.addEventListener('keypress', (e) => { 
-            // Escape key
             if (e.keyCode == 27) {
                 this.closeModal(e) 
             }
