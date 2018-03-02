@@ -1,0 +1,45 @@
+{% extends "styleguide/styleguide.html" %}
+
+{% load styleguide_tags %}
+{% load static %}
+{% load jsx %}
+
+{% block styleguide_content %}
+<h1 class="styleguide-page-title">Search Components</h1>
+
+{% example "Simple Search" %}
+    <!-- TEMPLATE -->
+    <form>
+        <fieldset>
+            <div class="search">
+                {{ everything_bagel_form.search }}
+                <div class="search-submit">
+                    <input type="submit" value="" formnovalidate>
+                    {% include 'includes/search_icon.html' %}
+                </div>
+            </div>
+        </fieldset>
+    </form>
+{% endexample %}
+
+{% example "Category Search" %}
+    <!-- TEMPLATE -->
+    <form>
+        <fieldset>
+            <div class="category-search">
+                <div class="search-select">
+                    {{ everything_bagel_form.select }}
+                    <div class="search-select-display">All</div>
+                </div>
+                <div class="search-wrapper">
+                    {{ everything_bagel_form.search }}
+                    <div class="search-submit">
+                        <input type="submit" value="" formnovalidate>
+                        {% include 'includes/search_icon.html' %}
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+{% endexample %}
+{% endblock %}
