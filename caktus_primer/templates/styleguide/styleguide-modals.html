@@ -32,7 +32,12 @@
         button[aria-label="close"]:hover {
             color: red;
         }
-
+        
+        @media all and (max-width: 600px) {
+            dialog {
+                width: 90% !important;
+            }
+        }
     </style>
     {% endblock %}
 </head>
@@ -50,7 +55,7 @@
 
     <p>For further reading on the <code>{% filter force_escape %}<dialog>{% endfilter %}</code> element, see <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog" target="_blank">here</a>.</p>
     <p>To ensure browser compatibility, we are including a <a href="https://github.com/GoogleChrome/dialog-polyfill" target="_blank">polyfill</a> so that this approach works on all browsers, including IE 9.</p>
-    <h2 class="styleguide-heading">Small Modals</h2>
+    <h2 class="styleguide-heading">Small Modal</h2>
     <div id="smallDialog">
         <button type="button" class="btn-open" id="modal_open" aria-label="open">Open Small Modal</button>
         <dialog>
@@ -60,7 +65,7 @@
         </dialog>
     </div>
 
-    <h2 class="styleguide-heading">Medium Modals</h2>
+    <h2 class="styleguide-heading">Medium Modal</h2>
     <div id="mediumDialog">
         <button type="button" class="btn-open" id="modal_open" aria-label="open">Open Medium Modal</button>
         <dialog>
@@ -70,7 +75,7 @@
         </dialog>
     </div>
 
-    <h2 class="styleguide-heading">Large Modals</h2>
+    <h2 class="styleguide-heading">Large Modal</h2>
     <div id="largeDialog">
         <button type="button" class="btn-open" id="modal_open" aria-label="open">Open Large Modal</button>
         <dialog>
@@ -119,6 +124,9 @@
 <script type="text/javascript">
 'use strict'
 
+let clickEvents = ['click', 'mousedown', 'touchstart', 'dblclick']
+
+
 class Modal {
     constructor(id) {
         this.name = 'Modal'
@@ -132,9 +140,17 @@ class Modal {
         else {
             return
         }
-        // todo: add event handlers for other forms of click interaction like touchstart, etc.
-        this.openTarget.addEventListener('click', (e) => { this.handleClick(e) })
-        this.closeTarget.addEventListener('click', (e) => { this.closeModal(e) })
+
+        clickEvents.forEach((n) => (this.openTarget.addEventListener(n, (e) => { this.handleClick(e)})))
+        
+        clickEvents.forEach((n) => (this.closeTarget.addEventListener(n, (e) => { this.closeModal(e)})))
+        
+        document.addEventListener('keypress', (e) => { 
+            // Escape key
+            if (e.keyCode == 27) {
+                this.closeModal(e) 
+            }
+        })
     }
 
     handleClick() {
