@@ -90,18 +90,29 @@ for $colorset-name, $colorset in $colorsets
 
   center()
 
-.alert
+.alert-msg
+  @extend .message
   applyColorSet("content-alert", "interactive")
 
 $brand-color = grey
 
 .button-not-aa
-  background-color: $brand-color
-  color: lightgrey
+  button-style({
+    bg: $brand-color,
+    fg: lightgrey,
+    hover: darken($brand-color, 20%),
+    active: lighten($brand-color, 20%),
+    interactive: true,
+  })
 
 .button-aa
-  background-color: closest-aa-contrast($brand-color, lightgrey)
-  color: lightgrey
+  button-style({
+    bg: closest-aa-contrast($brand-color, lightgrey),
+    fg: lightgrey,
+    hover: darken($brand-color, 20%),
+    active: lighten($brand-color, 20%),
+    interactive: true,
+  })
 
 dt+dd
   margin-left: 2em
