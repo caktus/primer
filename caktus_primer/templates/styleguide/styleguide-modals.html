@@ -32,7 +32,7 @@
         button[aria-label="close"]:hover {
             color: red;
         }
-        
+
         @media all and (max-width: 600px) {
             dialog {
                 width: 90% !important;
@@ -141,14 +141,15 @@ class Modal {
         }
 
         // Attach event listeners to our click events to handle opening and closing the modal window
-        clickEvents.forEach((n) => (this.openTarget.addEventListener(n, (e) => { this.handleClick(e)})))
-        
-        clickEvents.forEach((n) => (this.closeTarget.addEventListener(n, (e) => { this.closeModal(e)})))
-        
+        clickEvents.forEach((n) => {
+            this.openTarget.addEventListener(n, (e) => { this.handleClick(e) })
+            this.closeTarget.addEventListener(n, (e) => { this.closeModal(e) })
+        });
+
         // Escape key
-        document.addEventListener('keypress', (e) => { 
+        document.addEventListener('keypress', (e) => {
             if (e.keyCode == 27) {
-                this.closeModal(e) 
+                this.closeModal(e)
             }
         })
     }
