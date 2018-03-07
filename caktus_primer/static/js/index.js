@@ -1,8 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-var KEY_UP = 38
-var KEY_DOWN = 40
+let KEY_ENTER = 13
+let KEY_UP = 38
+let KEY_DOWN = 40
 
 export class Dropdown extends React.Component {
     constructor() {
@@ -26,7 +27,9 @@ export class Dropdown extends React.Component {
 
     toggle(ev) {
         this.setState({expanded: !this.state.expanded})
-        ev.preventDefault()
+        if (ev) {
+            ev.preventDefault()
+        }
     }
 
     setWrapperRef(node) {
@@ -47,27 +50,35 @@ export class Dropdown extends React.Component {
     }
 
     key(ev) {
+        let selected = this.state.selected
         switch (ev.keyCode) {
             case KEY_UP:
-                this.setState({selected: this.state.selected - 1})
+                selected = this.state.selected - 1
                 break
             case KEY_DOWN:
-                this.setState({selected: this.state.selected + 1})
+                selected = this.state.selected + 1
                 break
-            case 13:
-                // ????
+            case KEY_ENTER:
+                if (this.curLink) {
+                    window.location.href = this.curLink
+                }
+                this.toggle()
+                break
 
             default:
                 return
         }
+        
+        // -1 allows you to move up back to the button to close it with [ENTER]
+        selected = Math.max(-1, selected)
+        selected = Math.min(selected, this.props.children.length - 1)
+        this.setState({selected})
         ev.preventDefault()
     }
 
     render() {
         var className = this.getClass()
         var index = this.state.selected
-
-        console.log(this.curLink)
 
         var options = this.props.children.map((el, i)=> {
             let className = ""
@@ -84,7 +95,7 @@ export class Dropdown extends React.Component {
         })
 
         return (
-            <div className="primer-dropdown" ariaExpanded="false" ariaHaspopup="true"
+            <div className="primer-dropdown" ariaExpanded={this.state.expanded} ariaHaspopup="true"
                 onKeyDown={(ev)=>this.key(ev)}
                 ref={this.setWrapperRef}
             >
