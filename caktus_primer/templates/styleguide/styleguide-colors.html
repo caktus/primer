@@ -3,23 +3,23 @@
 {% load styleguide_tags %}
 
 {% block styleguide_content %}
-    <h1 class="styleguide-page-title">Color and Grayscale</h1>
+    <h1>Color and Grayscale</h1>
 	
 	<p>Color is used to represent the brand, to communicate interactions and feedback, and to improve aesthetics of an application. Brand colors are expressed as primary, secondary, and accent colors. For brands with a more extensive color palette, additional designations are needed. Color palettes consist of base color values espressed as variables, and their derivatives, e.g., dark, light, very light, etc., expressed as Stylus hash objects. For each color, the derivatives are built as steps of alpha transparency. Colors are retrieved from hash objects by concatenating the hash name, key name, and nested key name, e.g. <code>$palette.primary.dark</code>.</p>
     <p>Grayscale consists of black and white, and shades that are alpha values between them, expressed as Stylus hash objects. It can be extended to include more shades as necessary. Black, white, and the shades of gray are retrieved from hash objects by concatenating the hash name, key, and nested key, e.g. <code>$palette.grayscale.dark</code>.</p>
 	
-	<h2 class="styleguide-heading">Color Constrast for Web Accessibility</h2>
+	<h2>Color Constrast for Web Accessibility</h2>
 	<p>When using colors for text and background, be mindful of the text/background <a href="https://webaim.org/resources/contrastchecker/" target="_blank">contrast</a>. Aim at achieving contrast ratio of 4.5:1 for normal text and 3:1 for large text (<a href="https://www.w3.org/TR/2008/REC-WCAG20-20081211/#visual-audio-contrast-contrast" target="_blank">level AA of WCAG 2.0</a>).</p>
 	<p>A possible exception to meeting the color contrast requirement could be a disabled element, in which dimished legibility of the text is itself an indication of the element's disabled state.</p>
 	<p>Text/background color pairs should be evaluated for each project based on its specific colors palettes.</p>
 	<p></p>
 
-	<h3 class="styleguide-page-title">Color Helpers</h1>
+	<h3>Color Helpers</h1>
 	<p>Color selection is important and not always obvious, so there are many helpers to make the job easier.</p>
 	
 	
 	
-	<h2 class="styleguide-heading">Action Colors</h2>
+	<h2>Action Colors</h2>
 	<p>Colors can be used to indicate the meaning of interactions. Make sure you <a href="https://www.w3.org/TR/2008/REC-WCAG20-20081211/#visual-audio-contrast-without-color" target="_blank">don’t use color alone as action indicator</a>, but combine it with other means of conveying information, e.g., text.</p>
 	<p>The meaning should be assigned to colors based on established conventions and the selection of colors within a given palette. For the color palettes shown in this Styleguid Primer, the suggested meaning of interactions includes:</p>
 	<ul> 
@@ -28,7 +28,7 @@
 		<li>Alert for destructive actions, warning and error feedback</li>
 	</ul>
 	
-	<h3 class="styleguide-heading">Interactive Elements Colors</h3>
+	<h3>Interactive Elements Colors</h3>
 	<p>For interactive elements with larger interactive surface area (e.g. buttons), use the background color that has sufficient contrast with white text. Create hover and focus states by darkening the rest state color, and an active state by increasing the saturation. The exact values of the <code>darken</code> and <code>saturate</code> functions should be project specific.</p>
 	<p>For disabled elements use mid gray text on very light gray background. This color combination does not meet the minimum color constrast requirement, and creates a friction that provides additional feedback that the element is disabled.</p>
 	{% example %}
@@ -83,7 +83,7 @@
 			Disabled
 		</div>
 	{% endexample %}
-	<h3 class="styleguide-heading">Messaging Colors</h3>
+	<h3>Messaging Colors</h3>
 	<p>For messages, callouts, and feedback, use very light shades for background. Use dark or very dark color for text based on the minimum color contrast requirement (see possible color combinations under Text/Background Color Combinations).</p>
 	{% example %}
 	<!-- Stylus -->
@@ -121,12 +121,12 @@
 			This is a neutral message.
 		</div>
 	{% endexample %}
-    <h2 class="styleguide-heading">Text/Background Color Combinations</h2>
+    <h2>Text/Background Color Combinations</h2>
 	<p>Examples below show suggested text/background color combinations based the color palette used in this Styleguide Primer. The suggested combinations work also when the text and background colors are reversed.</p>
 	<p>For interactive element, please use the pre-determined combinations shown at the beginning of this page.</p>
 	<div class="swatches-category-wrapper">
 		<div class="swatches-category">
-			<h3 class="styleguide-heading">Primary Background</h3>
+			<h3>Primary Background</h3>
 			<ul class="grid swatches">
 				<li class="swatch">
 					<div class="swatch-hue primary-very-dark">
@@ -160,7 +160,7 @@
 			</ul>
 		</div>
 		<div class="swatches-category">
-			<h3 class="styleguide-heading">Secondary Background</h3>
+			<h3>Secondary Background</h3>
 			<ul class="grid swatches">
 				<li class="swatch">
 					<div class="swatch-hue secondary-very-dark">
@@ -195,7 +195,7 @@
 			</ul>
 		</div>
 		<div class="swatches-category">
-			<h3 class="styleguide-heading">Accent Background</h3>
+			<h3>Accent Background</h3>
 			<ul class="grid swatches">
 				<li class="swatch">
 					<div class="swatch-hue accent-very-dark">
@@ -230,7 +230,7 @@
 			</ul>
 		</div>
 		<div class="swatches-category">
-			<h3 class="styleguide-heading">Alert Background</h3>
+			<h3>Alert Background</h3>
 			<ul class="grid swatches">
 				<li class="swatch">
 					<div class="swatch-hue alert-very-dark">
@@ -265,7 +265,7 @@
 			</ul>
 		</div>
 		<div class="swatches-category">
-			<h3 class="styleguide-heading">Grayscale Background</h3>
+			<h3>Grayscale Background</h3>
 			<ul class="grid swatches">
 				<li class="swatch">
 					<div class="swatch-hue black">

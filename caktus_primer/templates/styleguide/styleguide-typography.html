@@ -4,15 +4,15 @@
 
 {% block styleguide_content %}
 
-<h1 class="styleguide-page-title">Typography</h1>
+<h1>Typography</h1>
 <p>Consistent web typography helps achieve a hierarchy and vertical rhythm of a layout.</p>
 
-<h2 class="styleguide-heading">Font Size</h2>
-<h3 class="styleguide-heading">Base Font Size</h3>
+<h2>Font Size</h2>
+<h3>Base Font Size</h3>
 <p>The base font size is defined as a variable <code>$font-size-base</code>. The default value for this style guide is <code>$font-size-base = 16px</code>, and it can be adjusted based on project needs.</p>
 
 
-<h3 class="styleguide-heading">Responsive Font Sizes</h3>
+<h3>Responsive Font Sizes</h3>
 <p>Font sizes across devices scale from a minimum value on mobile, <code>$font-size-very-small</code>, to a maximum value on desktop, <code>$font-size-base</code>, between a minimum screen width, <code>$minScreenWidth = 320</code>, and a maximum screen width, <code>$maxScreenWidth = 960</code>. The minimum to a maximum font size values, as well as the minimum and maximum screen width values can be modified per project requirements.</p>
 
 <p>Responsive font sizes are defined by a <code>graduated()</code> function, which takes a property (e.g. font size), its minimum and maximum values, and a value of the modular scale (see explanation of the modular scale below).</p>
@@ -28,7 +28,7 @@ body
 
 {% endexample %}
 
-<h2 class="styleguide-heading">Vertical Rhythm</h2>
+<h2>Vertical Rhythm</h2>
 <p>Vertical rhythm is a vertical patterns in a layout achieved by a repetition of typographic elements (headings, paragraphs, and lines of text), and the white space between them. We create vertical rhythm by controlling the values of:</p>
 <ul>
 	<li>Modular scale</li>
@@ -36,14 +36,14 @@ body
 	<li>Margins</li>
 </ul>
 
-<h3 class="styleguide-heading">Modular Scale</h3>
+<h3>Modular Scale</h3>
 <p>Font size increases from <code>&lt;p&gt;</code> through <code>&lt;h&gt;</code> elements by a constant ratio. The resulting sequence of font size values is called modular scale. The value of the modular scale factor is defined as a variable <code>$fontScale</code> and can be modified per project requirements. The default value used in this style guide primer is <a href="http://www.modularscale.com/?1&em&1.25">major third</a>, <code>$fontScale = 1.25</code>.
 
-<h3 class="styleguide-heading">Line Height</h3>
+<h3>Line Height</h3>
 <p>Line-height is the basis of a so-called <a href="https://webdesign.tutsplus.com/articles/setting-web-type-to-a-baseline-grid--webdesign-3414">baseline grid</a>, a technique fundamental to establishing correct typographic relationships.</p>
 <p>In this style guide primer, the base line height is defined as a variable <code>$line-height-base</code>. The default line-height value for this style guide is 1.5 (<code>$line-height-base = $font-size-base*1.5</code>), and it can be adjusted based on project needs.</p>
 
-<h3 class="styleguide-heading">Responsive Line Height</h3>
+<h3>Responsive Line Height</h3>
 
 <p>Line height across devices scales from a minimum value on mobile, <code>$line-height-small</code>, to a maximum value on desktop, <code>$line-height-base</code>, between a minimum screen width, <code>$minScreenWidth = 320</code>, and a maximum screen width, <code>$maxScreenWidth = 960</code>. The minimum to a maximum line height values, as well as the minimum and maximum screen width values can be modified per project requirements.</p>
 
@@ -60,10 +60,10 @@ body
 
 {% endexample %}
 
-<h3 class="styleguide-heading"> Margins</h3>
+<h3> Margins</h3>
 <p>Margins applied to typographic elements are derived from the line height. For example, a default margin-bottom on a <code>p</code> element is defined as 1.25 of the base line height (<code>$line-height-base*1.25</code>).</p>
 
-<h3 class="styleguide-heading">Responsive Margins</h3>
+<h3>Responsive Margins</h3>
 <p>Using the <code>graduated()</code> function, we scale margins across devices between a minimum screen width, <code>$minScreenWidth = 320</code>, and a maximum screen width, <code>$maxScreenWidth = 960</code>, from <code>$line-height-small*1.25</code> to <code>$line-height-base*1.25</code>.</p>
 
 
@@ -79,7 +79,7 @@ p
 
 {% endexample %}
 
-<h2 class="styleguide-heading">Font Weights</h2>
+<h2>Font Weights</h2>
 <p>Font weights are defined as a font weight dictionary. The selection of keys and their values depends on the typefaces used.</p>
 
 {% example wide=True %}
