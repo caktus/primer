@@ -5,6 +5,19 @@ let KEY_ENTER = 13
 let KEY_UP = 38
 let KEY_DOWN = 40
 
+class If extends React.Component {
+    render() {
+        if (this.props.true) {
+            if (typeof(this.props.children) === "string") {
+                return <span>{this.props.children}</span>
+            }
+            return this.props.children || null
+        } else {
+            return null
+        }
+    }
+}
+
 export class Dropdown extends React.Component {
     constructor() {
         super()
@@ -68,7 +81,7 @@ export class Dropdown extends React.Component {
             default:
                 return
         }
-        
+
         // -1 allows you to move up back to the button to close it with [ENTER]
         selected = Math.max(-1, selected)
         selected = Math.min(selected, this.props.children.length - 1)
@@ -100,11 +113,9 @@ export class Dropdown extends React.Component {
                 ref={this.setWrapperRef}
             >
                 <button onClick={()=>this.toggle()}>{this.props.label}</button>
-                {this.state.expanded ?
-                <ul className={className}>
-                    {options}
-                </ul>
-                :null}
+                <If true={this.state.expanded}>
+                    <ul className={className}>{options}</ul>
+                </If>
             </div>
         )
     }
