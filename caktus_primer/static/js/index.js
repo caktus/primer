@@ -1,5 +1,5 @@
 
-module.exports = CaktusPrimer;
+module.exports = CaktusPrimer
 function CaktusPrimer(){}
 
 CaktusPrimer.prototype.categorySearchSelect = (function(){
