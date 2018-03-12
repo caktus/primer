@@ -1,6 +1,9 @@
 
-export function categorySearchSelect(){
-	let selectWrap = document.getElementsByClassName('search-select');
+module.exports = CaktusPrimer;
+function CaktusPrimer(){}
+
+CaktusPrimer.prototype.categorySearchSelect = (function(){
+	let selectWrap = document.getElementsByClassName('search-select')
 	for (let el of selectWrap) {
 		let selectElement = el.querySelector('select')
 		// set initially to the selected value
@@ -8,6 +11,6 @@ export function categorySearchSelect(){
 		// add event listener
 		selectElement.addEventListener('change', function() {
 			el.querySelector('.search-select-display').innerHTML = selectElement.options[selectElement.selectedIndex].innerHTML
-		});
+		})
 	}
-};
+})()
