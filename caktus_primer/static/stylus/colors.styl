@@ -46,6 +46,7 @@ $palette = {
 	},
 	grayscale : {
 		black: $black,
+		very-dark : darken($black, 15%),
 		dark : lighten($black, 30%),
 		mid : lighten($black, 70%),
 		light : lighten($black, 85%),
@@ -92,7 +93,7 @@ $colorsets.content-alert = {
 }
 $colorsets.content-message = {
 	bg: $palette.grayscale.light,
-	fg: $palette.grayscale.dark,
+	fg: $palette.grayscale.very-dark,
 	shadow: none,
 }
 
