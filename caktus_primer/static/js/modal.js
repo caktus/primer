@@ -1,32 +1,32 @@
 let clickEvents = ['click', 'mousedown', 'touchstart', 'dblclick']
-
+let sizeMap = {'small': '30%', 'medium': '50%', 'large': '80%'}
 
 class Modal {
-    constructor(id) {
+    constructor(id, size = 'medium') {
         this.name = 'Modal'
-        this.options = {}
-        this.container = document.getElementById(id) || null
+        this.container = document.getElementById(id)
         if (this.container) {
             this.openTarget = this.container.querySelector('[aria-label="open"]')
             this.dialogTarget = this.container.getElementsByTagName('dialog')[0]
+            this.dialogTarget.style.width = sizeMap[size] // set the size of the modal; default to 'medium' size
             this.closeTarget = this.container.querySelector('[aria-label="close"]')
+
+            // Attach event listeners to our click events to handle opening and closing the modal window
+            clickEvents.forEach((n) => {
+                this.openTarget.addEventListener(n, (e) => { this.handleClick(e) })
+                this.closeTarget.addEventListener(n, (e) => { this.closeModal(e) })
+            })
+            
+            document.addEventListener('keypress', (e) => { 
+                // Escape key
+                if (e.keyCode == 27) {
+                    this.closeModal(e) 
+                }
+            })
         }
         else {
             return
         }
-
-        // Attach event listeners to our click events to handle opening and closing the modal window
-        clickEvents.forEach((n) => {
-            this.openTarget.addEventListener(n, (e) => { this.handleClick(e) })
-            this.closeTarget.addEventListener(n, (e) => { this.closeModal(e) })
-        })
-        
-        document.addEventListener('keypress', (e) => { 
-            // Escape key
-            if (e.keyCode == 27) {
-                this.closeModal(e) 
-            }
-        })
     }
 
     handleClick() {
@@ -37,33 +37,5 @@ class Modal {
     closeModal() {
         this.dialogTarget.close()
         document.body.style.overflow = '';
-    }
-
-}
-
-class LargeModal extends Modal {
-    constructor(id) {
-        super(id)
-        this.options['size'] = '80%'
-        this.name = 'LargeModal'
-        this.dialogTarget.style.width = this.options['size']
-    }
-}
-
-class MediumModal extends Modal {
-    constructor(id) {
-        super(id)
-        this.options['size'] = '50%'
-        this.name = 'MediumModal'
-        this.dialogTarget.style.width = this.options['size']
-    }
-}
-
-class SmallModal extends Modal {
-    constructor(id) {
-        super(id)
-        this.options['size'] = '30%'
-        this.name = 'MediumModal'
-        this.dialogTarget.style.width = this.options['size']
     }
 }
