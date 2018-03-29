@@ -1,7 +1,7 @@
 let clickEvents = ['click', 'mousedown', 'touchstart', 'dblclick']
 let sizeMap = {'small': '30%', 'medium': '50%', 'large': '80%'}
 
-class Modal {
+export class Modal {
     constructor(id, size = 'medium') {
         this.name = 'Modal'
         this.container = document.getElementById(id)

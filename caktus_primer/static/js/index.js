@@ -1,4 +1,7 @@
-import {Modal, LargeModal, MediumModal, SmallModal} from "modal"
+import {Modal} from "./modal"
+
+// inserts modal exports into the window for the examples to user
+Object.assign(window, {Modal})
 
 module.exports = CaktusPrimer
 function CaktusPrimer(){}

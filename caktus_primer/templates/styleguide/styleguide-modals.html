@@ -1,46 +1,7 @@
 {% extends "styleguide/styleguide.html" %}
 
 {% load styleguide_tags %}
-<head>
-    {% block extra-css %}
-    <style>
-        dialog {
-            position: relative;
-            padding: 2em 2em;
-            border: none;
-            box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.1);
-        }
 
-        dialog::backdrop {
-            background: #2B2B28;
-            opacity: 0.7;
-        }
-
-        button[aria-label="close"] {
-            position: absolute;
-            height: 44pt; /* Per Apple's HIG we should maintain a tappable area of 44pt by 44pt */
-            width: 44pt;
-            top: 0;
-            right: 0;
-            color: black;
-            border: none;
-            background: transparent;
-            box-shadow: none;
-            font-weight: bold;
-        }
-
-        button[aria-label="close"]:hover {
-            color: red;
-        }
-
-        @media all and (max-width: 600px) {
-            dialog {
-                width: 90% !important;
-            }
-        }
-    </style>
-    {% endblock %}
-</head>
 {% block styleguide_content %}
     <h1 class="styleguide-page-title">Modals</h1>
     <p>HTML 5.2 now includes a <code>{% filter force_escape %}<dialog>{% endfilter %}</code> element we can leverage to create modals, or an absolutely positioned and horizontally centered content box that appears on top of other content on a page.</p>
@@ -133,83 +94,12 @@
 
 {% block extra-js %}
 <script type="text/javascript">
-
-let clickEvents = ['click', 'mousedown', 'touchstart', 'dblclick']
-
-
-class Modal {
-    constructor(id) {
-        this.name = 'Modal'
-        this.options = {}
-        this.container = document.getElementById(id) || null
-        if (this.container) {
-            this.openTarget = this.container.querySelector('[aria-label="open"]')
-            this.dialogTarget = this.container.getElementsByTagName('dialog')[0]
-            this.closeTarget = this.container.querySelector('[aria-label="close"]')
-        }
-        else {
-            return
-        }
-
-        // Attach event listeners to our click events to handle opening and closing the modal window
-        clickEvents.forEach((n) => {
-            this.openTarget.addEventListener(n, (e) => { this.handleClick(e) })
-            this.closeTarget.addEventListener(n, (e) => { this.closeModal(e) })
-        });
-
-        // Escape key
-        document.addEventListener('keypress', (e) => {
-            if (e.keyCode == 27) {
-                this.closeModal(e)
-            }
-        })
-    }
-
-    handleClick() {
-        this.dialogTarget.showModal()
-        document.body.style.overflow = 'hidden';
-    }
-
-    closeModal() {
-        this.dialogTarget.close()
-        document.body.style.overflow = '';
-    }
-
-}
-
-class LargeModal extends Modal {
-    constructor(id) {
-        super(id)
-        this.options['size'] = '80%'
-        this.name = 'LargeModal'
-        this.dialogTarget.style.width = this.options['size']
-    }
-}
-
-class MediumModal extends Modal {
-    constructor(id) {
-        super(id)
-        this.options['size'] = '50%'
-        this.name = 'MediumModal'
-        this.dialogTarget.style.width = this.options['size']
-    }
-}
-
-class SmallModal extends Modal {
-    constructor(id) {
-        super(id)
-        this.options['size'] = '30%'
-        this.name = 'MediumModal'
-        this.dialogTarget.style.width = this.options['size']
-    }
-}
-
-
-let largeModal = new LargeModal('largeDialog')
-let mediumModal = new MediumModal('mediumDialog')
-let smallModal = new SmallModal('smallDialog')
-let formModal = new MediumModal('formDialog')
-
+    document.addEventListener("DOMContentLoaded", () => {
+        let largeModal = new Modal('largeDialog', 'large')
+        let mediumModal = new Modal('mediumDialog', 'medium')
+        let smallModal = new Modal('smallDialog', 'small')
+        let formModal = new Modal('formDialog', 'medium')
+    })
 </script>
 {% endblock %}
 
