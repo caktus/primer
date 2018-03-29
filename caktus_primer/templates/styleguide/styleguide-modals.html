@@ -107,6 +107,13 @@
 
     <h2 class="styleguide-heading">Usage</h2>
     {% example wide=True %}
+        <!-- DOCS -->
+        Here are the JS and HTML markup requirements in order for the Modals mixins to work.
+        <ul>
+            <li>1. HTML markup expects the following in the example block below. Our mixin expects the proper <code>aria-label</code> attributes for the open and close buttons to function properly. This is important. If you omit these attributes, the mixin will not work as intended.</li>
+            <li>2. There are 3 modal sizes to select from when you instantiate the modal mixin: small, medium, and large. They each take up 30%, 50%, and 80% of the screen width respectively. To select a modal size, simply instantiate the corresponding modal, eg. <code>let formModal = new MediumModal('formDialog')</code>.</li>
+        </ul>
+
         <!-- HTML -->
         <div id="mediumDialog">
             <button type="button" class="btn-open" id="modal_open" aria-label="open">Open Medium Modal</button>
@@ -116,6 +123,10 @@
                 <button type="button" class="btn-close" id="modal_close" aria-label="close">X</button>
             </dialog>
         </div>
+
+        <!-- JS -->
+        let mediumModal = new MediumModal('mediumDialog')
+
         {% endexample %}
 
 {% endblock %}
