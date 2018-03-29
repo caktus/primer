@@ -3,16 +3,16 @@
 {% load styleguide_tags %}
 
 {% block styleguide_content %}
-<h1 class="styleguide-page-title">Buttons</h1>
+<h1>Buttons</h1>
 
-<h2 class="styleguide-heading">Basic Buttons</h2>
+<h2>Basic Buttons</h2>
 <p>Use class names to denote a button's purpose and style.</p>
     {% example "Default Button" %}
         <button>Confirm</button>
         <button class="cancel">Cancel</button>
         <button class="danger">Erase All</button>
     {% endexample %}
-<h2 class="styleguide-heading">Special Buttons</h2>
+<h2>Special Buttons</h2>
 <p>The following examples below represent exceptions using the <code>{% filter force_escape %}<button></button>{% endfilter %}</code> tag to denote button elements. These examples require the buttons to be marked up as <code>{% filter force_escape %}<input>{% endfilter %}</code> elements in order to work properly.</p>
     {% example "File/Upload Button" %}
     <!-- TEMPLATE -->

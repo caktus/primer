@@ -1,0 +1,121 @@
+search-component($bg, $fg, $hover, $width=100%)
+    display: flex
+    height: 3em
+    width: $width
+    border-radius: 2em
+    border: 1px solid darken($bg, 8%)
+    overflow: hidden
+
+    input[type="text"]
+        display: block
+        width: 100%
+        max-width: none
+        margin: 0
+        padding: 0 1em
+        border: none
+        background: transparent
+
+        &:focus
+            border: none
+
+        &::placeholder
+            color: $palette.grayscale.light
+
+    .search-submit
+        position: relative
+        width: 4em
+        height: 3em
+        padding: 0
+        transition: all 0.4s
+
+        svg
+            position: absolute
+            bottom: 28%
+            right: 28%
+            width: 45%
+            height: 45%
+            pointer-events: none
+            *
+                stroke: $fg
+                transition: all 0.4s
+
+        input[type="submit"]
+            position: absolute
+            top: 0
+            right: 0
+            width: 100%
+            height: 100%
+            padding: 0
+            margin: 0
+            border-radius: 0
+            background: $bg
+            box-shadow: none
+            transition: all 0.2s
+
+            &:hover + svg *
+                stroke: $hover
+
+            &:focus + svg *
+                stroke: $hover
+
+            &:active
+                transition: all 0s
+                background: $palette.grayscale.light
+
+
+category-search-component($bg, $fg, $hover, $width=100%)
+    display: flex
+    height: 3em
+    border-radius: 2em
+    border: 1px solid darken($bg, 8%)
+    overflow: hidden
+
+    .search-wrapper
+        search-component($bg, $fg, $hover, $width)
+        border: none
+        border-radius: 0
+
+    .search-select
+        position: relative
+
+        .search-select-display
+            position: static
+            white-space: nowrap
+            height: 3em
+            padding: 0.75em 2.4em 0 1em
+            color: $fg
+            background-color: $bg
+
+        .search-select-display::after
+            content: ''
+            position: absolute
+            top: calc(50% - 5px)
+            right: 1em
+            display: inline-block
+            width: 7px
+            height: 7px
+            background: linear-gradient(135deg, transparent 50%, $fg 50%)
+            transform: rotate(45deg)
+
+        select:not([multiple])
+            opacity: 0
+            position: absolute
+            top: 0
+            width: 100%
+
+            &:hover + .search-select-display
+                color: $hover
+                &::after
+                    background: linear-gradient(135deg, transparent 50%, $hover 50%)
+
+            &:focus + .search-select-display
+                color: $hover
+                &::after
+                    background: linear-gradient(135deg, transparent 50%, $hover 50%)
+
+
+.search
+    search-component($palette.grayscale.very-light, $palette.secondary.light, $palette.accent.base)
+
+.category-search
+    category-search-component($palette.grayscale.very-light, $palette.secondary.light, $palette.accent.base)
