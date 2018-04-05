@@ -44,8 +44,8 @@ color-light-edge($base, $against)
 	else
 		return $base
 
-check-aa-contrast($base, $against)
-	return contrast($base, $against).ratio >= 4.5
+check-aa-contrast($base, $against, $min=4.5)
+	return contrast($base, $against).ratio >= $min
 
 closest-aa-contrast($base, $against)
 	if $base < $against

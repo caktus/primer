@@ -230,14 +230,12 @@ section.color-gallery
 	color: $palette.alert.base	
 
 .success-message
-	background-color: $palette.primary.very-light
-	color: $palette.primary.very-dark
+	applyColorSet("content-success")
 	text-align: center
 	padding: 1.5rem 2rem
 	
 .attention-grabber-message
-	background-color: $palette.accent.very-light
-	color: $palette.accent.dark
+	applyColorSet("content-attention")
 	text-align: center
 	padding: 1.5rem 2rem
 	
@@ -247,8 +245,7 @@ section.color-gallery
 	padding: 1.5rem 2rem
 
 .neutral-message
-	background-color: $palette.grayscale.very-light
-	color: $palette.grayscale.very-dark
+	applyColorSet("content-message")
 	text-align: center
 	padding: 1.5rem 2rem
 	
