@@ -2,22 +2,22 @@
               Typography Pages Styles
 ******************************************/
 
-.styleguide-page-title // use for h1 in styleguide app
-	color: $palette.primary.base
+#styleguide-content
+	h1
+		color: $palette.primary.base
 
-.styleguide-heading //use for h2 - h5 in styleguide app
-	color: $palette.secondary.base
+		& + h2
+			margin-top: 2rem
 
-h1.styleguide-page-title
-	+ h2.styleguide-heading
-		margin-top: 2rem
+	h2,h3,h4,h5,h6
+		color: $palette.secondary.base
 
-aside h2
-	graduated(font-size, $font-size-small, $font-size-base, 0)
-	font-weight: $font-weight.bold
+	aside h2
+		graduated(font-size, $font-size-small, $font-size-base, 0)
+		font-weight: $font-weight.bold
 
-footer p
-	font-size: $font-size-small
+	footer p
+		font-size: $font-size-small
 
 .home-hero-heading
 	graduated(font-size, $font-size-small, $font-size-base, 5)

@@ -12,6 +12,7 @@
 @import 'examples.styl'
 @import 'layout-examples.styl'
 @import 'layout-whitespace.styl'
+@import 'search.styl'
 
 *
 	&:first-child
@@ -26,7 +27,8 @@
 	font-size: 100%
 
 body
-	applyColorSet("default")
+	{join(",", $content-tags)}
+		applyColorSet("default")
 
 section
 	width: 100%
