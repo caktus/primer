@@ -1,8 +1,7 @@
-
 module.exports = CaktusPrimer
 function CaktusPrimer(){}
 
-CaktusPrimer.prototype.categorySearchSelect = (function(){
+CaktusPrimer.categorySearchSelect = (() => {
 	let selectWrap = document.getElementsByClassName('search-select')
 	for (let el of selectWrap) {
 		let selectElement = el.querySelector('select')
