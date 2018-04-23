@@ -70,7 +70,7 @@ $colorsets = {}
 $colorsets.default = {
 	bg: $white,
 	fg: $black,
-	link: color-dark-edge($palette.primary.base, $white)
+	link: color-dark-edge($palette.accent.base, $white)
 	shadow: none,
 }
 
@@ -78,6 +78,7 @@ $colorsets.default = {
 $colorsets.content-attention = {
 	bg: $palette.accent.very-light,
 	fg: $palette.accent.dark,
+	link: color-dark-edge($palette.accent.base, $white),
 	shadow: none,
 }
 $colorsets.content-success = {
