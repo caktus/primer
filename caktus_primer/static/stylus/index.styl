@@ -55,29 +55,25 @@ generate-grid(columns)
 .primer-dropdown
 	button
 		border-radius: 0
+		applyColorSet("elem-affirm")
+
 	ul
+		applyColorSet("content-success")
 		list-style: none
 		margin: 0
 		padding: 0
 		border: 1px solid lightgrey
-		background: $palette.primary.very-light;
 		position: absolute
 		min-width: 200px
 
 		li
+			background-color: transparent
+
 			a
+				background-color: transparent
 				display: inline-block
 				height: 3em
 				padding: 1em 2em
 				outline: none
 				text-decoration: none
-				color: black
 				width: 100%
-
-			a:focus
-				background: black
-				color: white
-			&:hover, &.selected
-				a
-					background: black
-					color: white

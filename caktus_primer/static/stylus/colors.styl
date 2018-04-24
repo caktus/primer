@@ -161,6 +161,7 @@ getColorSetColor(colorset, cname)
 	error("Could not find color '" + cname + "' from colorset '" + _getColorSetName(colorset) + "' " + (cname in colorset))
 
 applyColorSet(pname, mode="content")
+	-debug-colorset: pname
 	background-color: getColorSetColor(pname, "bg")
 	color: getColorSetColor(pname, "fg")
 	box-shadow: 0 0 3px getColorSetColor(pname, "shadow")
@@ -172,12 +173,12 @@ applyColorSet(pname, mode="content")
 			error("Palette "+pname+" (fg) fails AA constrast requirements (4.5). Contrast was " + contrast(getColorSetColor(pname, "bg"), getColorSetColor(pname, "fg")).ratio)
 
 	if mode == "interactive" or 'interactive' in pname or $colorsets[pname].interactive
-		&:focus, &:hover
+		&:focus, &:hover, .selected
 			background-color: getColorSetColor(pname, "hover")
 		&:active
 			background-color: getColorSetColor(pname, "active")
 			transition: all 0s
-	else
+	else if mode == "content"
 		a
 			text-decoration: none
 			border-style: dotted

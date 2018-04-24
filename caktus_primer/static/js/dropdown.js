@@ -62,6 +62,35 @@ export class Dropdown extends React.Component {
         }
     }
 
+    key(ev) {
+        let selected = this.state.selected
+        switch (ev.keyCode) {
+            case KEY_UP:
+                selected = this.state.selected - 1
+                break
+            case KEY_DOWN:
+                selected = this.state.selected + 1
+                break
+            case KEY_ENTER:
+                try {
+                    let link = this.props.children[this.state.selected].props.href
+                    window.location.href = link
+                } catch (e) {
+                }
+                this.toggle()
+                break
+
+            default:
+                return
+        }
+
+        // -1 allows you to move up back to the button to close it with [ENTER]
+        selected = Math.max(-1, selected)
+        selected = Math.min(selected, this.props.children.length - 1)
+        this.setState({selected})
+        ev.preventDefault()
+    }
+
     render() {
         var className = this.getClass()
         var index = this.state.selected
@@ -70,7 +99,10 @@ export class Dropdown extends React.Component {
             let className = ""
             if (i == index) className = "selected"
             return (
-                <li key={i} className={className} onMouseUp={this.handleClickOutside}>{el}</li>
+                <li key={i} className={className}
+                    onMouseUp={this.handleClickOutside}
+                    onMouseEnter={() => this.setState({selected: i})}
+                >{el}</li>
             )
         })
 
