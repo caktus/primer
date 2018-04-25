@@ -26,7 +26,7 @@ export class Dropdown extends React.Component {
             focus: false,
             selected: -1,
         }
-        this.handleClickOutside = this.handleClickOutside.bind(this)
+        this.handleEventOutside = this.handleEventOutside.bind(this)
         this.setWrapperRef = this.setWrapperRef.bind(this)
     }
 
@@ -50,16 +50,32 @@ export class Dropdown extends React.Component {
     }
 
     componentDidMount() {
-        document.addEventListener('mousedown', this.handleClickOutside);
+        ['mousedown', 'keydown'].forEach((event) => 
+            document.addEventListener(event, this.handleEventOutside)
+        )
     }
     componentWillUnmount() {
-        document.removeEventListener('mousedown', this.handleClickOutside);
+        ['mousedown', 'keydown'].forEach((event) => 
+            document.removeEventListener(event, this.handleEventOutside)
+        )
     }
 
-    handleClickOutside(event) {
-        if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
-            this.setState({expanded: false})
+    handleEventOutside(event) {
+        if (event.type === 'mousedown') {
+            if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+                this.setState({expanded: false})
+            }
+        } else if (event.type === 'keydown') {
+            if (event.key === 'Escape') {
+                this.setState({expanded: false})
+            }
         }
+    }
+
+    followLink() {
+        let link = this.props.children[this.state.selected].props.href
+        window.location.href = link
+        this.setState({expanded: false})
     }
 
     key(ev) {
@@ -73,8 +89,7 @@ export class Dropdown extends React.Component {
                 break
             case KEY_ENTER:
                 try {
-                    let link = this.props.children[this.state.selected].props.href
-                    window.location.href = link
+                    this.followLink()
                 } catch (e) {
                 }
                 this.toggle()
@@ -100,21 +115,23 @@ export class Dropdown extends React.Component {
             if (i == index) className = "selected"
             return (
                 <li key={i} className={className}
-                    onMouseUp={this.handleClickOutside}
+                    onMouseUp={() => this.followLink()}
                     onMouseEnter={() => this.setState({selected: i})}
                 >{el}</li>
             )
         })
 
         return (
-            <div className="primer-dropdown" ariaExpanded={this.state.expanded} ariaHaspopup="true"
+            <span className="primer-dropdown" ariaExpanded={this.state.expanded} ariaHaspopup="true"
                 onKeyDown={(ev)=>this.key(ev)}
+                ref={this.setWrapperRef}
             >
                 <button onClick={()=>this.toggle()}>{this.props.label}</button>
                 <If true={this.state.expanded}>
-                    <ul className={className} ref={this.setWrapperRef}>{options}</ul>
+                    <ul className={className}
+                        >{options}</ul>
                 </If>
-            </div>
+            </span>
         )
     }
 }
