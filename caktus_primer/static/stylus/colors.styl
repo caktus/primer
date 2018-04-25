@@ -161,7 +161,6 @@ getColorSetColor(colorset, cname)
 	error("Could not find color '" + cname + "' from colorset '" + _getColorSetName(colorset) + "' " + (cname in colorset))
 
 applyColorSet(pname, mode="content")
-	-debug-colorset: pname
 	background-color: getColorSetColor(pname, "bg")
 	color: getColorSetColor(pname, "fg")
 	box-shadow: 0 0 3px getColorSetColor(pname, "shadow")
