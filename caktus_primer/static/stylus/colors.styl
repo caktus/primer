@@ -70,7 +70,7 @@ $colorsets = {}
 $colorsets.default = {
 	bg: $white,
 	fg: $black,
-	link: color-dark-edge($palette.primary.base, $white)
+	link: color-dark-edge($palette.accent.base, $white)
 	shadow: none,
 }
 
@@ -78,6 +78,7 @@ $colorsets.default = {
 $colorsets.content-attention = {
 	bg: $palette.accent.very-light,
 	fg: $palette.accent.dark,
+	link: color-dark-edge($palette.accent.base, $white),
 	shadow: none,
 }
 $colorsets.content-success = {
@@ -171,12 +172,12 @@ applyColorSet(pname, mode="content")
 			error("Palette "+pname+" (fg) fails AA constrast requirements (4.5). Contrast was " + contrast(getColorSetColor(pname, "bg"), getColorSetColor(pname, "fg")).ratio)
 
 	if mode == "interactive" or 'interactive' in pname or $colorsets[pname].interactive
-		&:focus, &:hover
+		&:focus, &:hover, .selected
 			background-color: getColorSetColor(pname, "hover")
 		&:active
 			background-color: getColorSetColor(pname, "active")
 			transition: all 0s
-	else
+	else if mode == "content"
 		a
 			text-decoration: none
 			border-style: dotted

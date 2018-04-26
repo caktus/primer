@@ -1,8 +1,30 @@
 {% extends "styleguide/styleguide.html" %}
 
 {% load styleguide_tags %}
+{% load jsx %}
 
 {% block styleguide_content %}
-    <h1 class="styleguide-page-title">Navigation Patterns</h1>
-    <p>A page to show a summary of all of our amazing ideas for Navigation Patterns</p>
+
+<h1 class="styleguide-page-title">Navigation Patterns</h1>
+<p>A page to show a summary of all of our amazing ideas for Navigation Patterns</p>
+
+{% example %}
+    <!-- DOCS -->
+    <p>The <code>Dropdown</code> React component is a simple dropdown menu for navigation needs.
+        It will appear as a button and present its list of links in a styled menu. The affirmative
+        "content-success" color set will be applied to the menu styles, but you can customize the
+        styling by adding rules to the <code>.primer-dropdown</code> CSS class.
+
+    <p>(Note: This is not a select widget, see the Form/Inputs page for select widgets)
+
+    <!-- TEMPLATE -->
+    {% jsx %}
+        <Dropdown label="Click Me">
+            <a href="#option1">Option 1</a>
+            <a href="#option2">Option 2</a>
+            <a href="#option3">Option 3</a>
+        </Dropdown>
+    {% endjsx %}
+{% endexample %}
+
 {% endblock %}
