@@ -121,66 +121,62 @@ nav#styleguide-menu
     background-color: $aside-light
     padding: 100px 2.2rem
 
-    ul
-        list-style: none
-        -webkit-padding-start: 0px
-        margin-bottom: 0
-        margin-left: 0
+    span
+        border: 1px solid $aside-dark
+        border-top: 0
+        margin:0
+        position: relative
+        display: inline-block
+        width: 100%
+
+        a
+            font-family: 'gt-walsheim-light-web'
+            font-weight: lighter
+            color: $palette.accent.base
+            text-decoration: none
+            display: block
+            width: 100%
+            height: 50px
+            padding: 1em
+
+        a:hover
+            background-color: $aside-base
+
+        span.toggle-menu
+            chevron(8px, $aside-accent, absolute, 18px, 20px)
+            pointer-events: none
+
+    .sub-menu
+        height: 0px
+        overflow: hidden
+        border-left: 4px solid $aside-accent
 
         li
-            border: 1px solid $aside-dark
-            border-top: 0
-            margin:0
-            position: relative
-
+            border: none
             a
-                font-family: 'gt-walsheim-light-web'
-                font-weight: lighter
-                color: $palette.accent.base
-                text-decoration: none
-                display: block
-                width: 100%
-                height: 100%
-                padding:1em
-
+                padding-left: 2em
             a:hover
                 background-color: $aside-base
 
-            span.toggle-menu
-                chevron(8px, $aside-accent, absolute, 18px, 20px)
-                pointer-events: none
+        &.open
+            height: auto
 
-            >ul.sub-menu
-                height: 0px
-                overflow: hidden
-                border-left: 4px solid $aside-accent
+    .selected
+        >a
+            background-color: $aside-base
 
-                li
-                    border: none
-                    a
-                        padding-left: 2em
-                    a:hover
-                        background-color: $aside-base
+        span.toggle-menu.open + ul.sub-menu
+            height: auto
+            border-top: 1px solid $aside-dark
 
-            span.toggle-menu.open + ul.sub-menu
-                height: auto
+    .selected.children
+        >a
+            background-color: transparent
 
-        li.selected
-            >a
-                background-color: $aside-base
+        >a:hover
+            background-color: $aside-base
 
-            span.toggle-menu.open + ul.sub-menu
-                height: auto
-                border-top: 1px solid $aside-dark
-
-        li.selected.children
-            >a
-                background-color: transparent
-
-            >a:hover
-                background-color: $aside-base
-
-        li:first-child
+    > span:first-child
             border-top: 1px solid $aside-dark
 
 
