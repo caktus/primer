@@ -44,12 +44,6 @@ section
 		margin-bottom: 1em
 		padding: 1em
 
-a
-	color: $palette.accent.base
-	&:hover,
-	&:focus
-		color: $palette.accent.very-dark
-
 generate-grid(columns)
 	display grid
 	grid-template-columns: repeat(columns, auto)
@@ -58,3 +52,30 @@ generate-grid(columns)
 	grid-row-gap: 2vw
 	background-color: grey
 	border: 1px solid
+
+.primer-dropdown
+	button
+		border-radius: 0
+		applyColorSet("elem-affirm")
+
+	ul
+		applyColorSet("content-success")
+		list-style: none
+		margin: 0
+		padding: 0
+		border: 1px solid lightgrey
+		position: absolute
+		min-width: 200px
+
+		li
+			background-color: transparent
+
+			a
+				background-color: transparent
+				display: inline-block
+				height: 3em
+				padding: 1em 2em
+				outline: none
+				text-decoration: none
+				width: 100%
+				border: 1px solid transparent

@@ -5,20 +5,20 @@
 // Variables
 
 $white = #ffffff
-$black = #2B2B28
-$primary-base = #9EC16C
-$secondary-base = #6C7A78
-$accent-base = #117f89
-$success-base = #9EC16C
-$alert-base = #CD3B3B
-$neutral-base = #6C7A78
+$black = #262929
+$primary-base = #99bd66
+$secondary-base = #697978
+$accent-base = #117F89
+$success-base = #99bd66
+$alert-base = #CA4916
+$neutral-base = #697978
 
 // Palettes
 
 $palette = {
 	primary : {
 		very-dark : darken($primary-base, 60%),
-		dark : darken($primary-base, 40%),
+		dark : darken($primary-base, 37%),
 		base : $primary-base,
 		light : lighten($primary-base, 55%),
 		very-light : lighten($primary-base, 80%)
@@ -48,9 +48,9 @@ $palette = {
 		black: $black,
 		very-dark : darken($black, 15%),
 		dark : lighten($black, 30%),
-		mid : lighten($black, 70%),
+		mid : lighten($black, 60%),
 		light : lighten($black, 85%),
-		very-light : lighten($black, 95%),
+		very-light : lighten($black, 97%),
 		white: $white
 	}
 	success : {
@@ -70,7 +70,7 @@ $colorsets = {}
 $colorsets.default = {
 	bg: $white,
 	fg: $black,
-	link: color-dark-edge($palette.primary.base, $white)
+	link: color-dark-edge($palette.accent.base, $white)
 	shadow: none,
 }
 
@@ -78,6 +78,7 @@ $colorsets.default = {
 $colorsets.content-attention = {
 	bg: $palette.accent.very-light,
 	fg: $palette.accent.dark,
+	link: color-dark-edge($palette.accent.base, $white),
 	shadow: none,
 }
 $colorsets.content-success = {
@@ -171,12 +172,12 @@ applyColorSet(pname, mode="content")
 			error("Palette "+pname+" (fg) fails AA constrast requirements (4.5). Contrast was " + contrast(getColorSetColor(pname, "bg"), getColorSetColor(pname, "fg")).ratio)
 
 	if mode == "interactive" or 'interactive' in pname or $colorsets[pname].interactive
-		&:focus, &:hover
+		&:focus, &:hover, .selected
 			background-color: getColorSetColor(pname, "hover")
 		&:active
 			background-color: getColorSetColor(pname, "active")
 			transition: all 0s
-	else
+	else if mode == "content"
 		a
 			text-decoration: none
 			border-style: dotted
