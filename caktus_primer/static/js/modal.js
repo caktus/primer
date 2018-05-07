@@ -5,6 +5,7 @@ export class Modal {
     constructor(id, size = 'medium') {
         this.name = 'Modal'
         this.container = document.getElementById(id)
+        console.log("Modal", id, size, this.container)
         if (this.container) {
             this.openTarget = this.container.querySelector('[aria-label="open"]')
             this.dialogTarget = this.container.getElementsByTagName('dialog')[0]
@@ -16,8 +17,12 @@ export class Modal {
                 this.openTarget.addEventListener(n, (e) => { this.handleClick(e) })
                 this.closeTarget.addEventListener(n, (e) => { this.closeModal(e) })
             })
+
+            this.dialogTarget.addEventListener("close", () => {
+                document.body.style.overflow = ''
+            })
             
-            document.addEventListener('keypress', (e) => { 
+            document.addEventListener('keypress', (e) => {
                 // Escape key
                 if (e.keyCode == 27) {
                     this.closeModal(e) 
@@ -31,11 +36,11 @@ export class Modal {
 
     handleClick() {
         this.dialogTarget.showModal()
-        document.body.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden'
     }
 
     closeModal() {
         this.dialogTarget.close()
-        document.body.style.overflow = '';
+        document.body.style.overflow = ''
     }
 }
