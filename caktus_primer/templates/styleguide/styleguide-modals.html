@@ -1,0 +1,121 @@
+{% extends "styleguide/styleguide.html" %}
+
+{% load styleguide_tags %}
+
+{% block styleguide_content %}
+    <h1 class="styleguide-page-title">Modals</h1>
+    <p>HTML 5.2 now includes a <code>{% filter force_escape %}<dialog>{% endfilter %}</code> element we can leverage to create modals, or an absolutely positioned and horizontally centered content box that appears on top of other content on a page.</p>
+    <p>The purpose of a modal can be varied; whether it serves as an alert message or a form, we use modals to direct a user's attention at whatever message or task is at hand.</p>
+    <p>There are 3 browser API methods we can now use with <code>{% filter force_escape %}<dialog>{% endfilter %}</code> elements: </p>
+        <ul>
+            <li><code>{% filter force_escape %}showModal(){% endfilter %}</code> This method will display the element as a modal. It will be displayed at the center of the page by default, and it resides in the top layer, which prevents interference by z-index, relative position and overflow of the parent element.</li>
+            <li><code>{% filter force_escape %}show(){% endfilter %}</code> This method reveals the element in accordance to its position in the DOM flow.</li>
+            <li><code>{% filter force_escape %}close(){% endfilter %}</code> This method will close a dialog. You can optionally pass in a <code>{% filter force_escape %}returnValue{% endfilter %}</code> parameter which will update the returnValue property on the dialog.</code></li>
+        </ul>
+    <p>Additionally, there is a new CSS pseudo class called <code>{% filter force_escape %}::backdrop{% endfilter %}</code> which allows us to easily style our modal backdrops. See the documentation <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/::backdrop" target="_blank">here</a>.</p>
+
+    <p>For further reading on the <code>{% filter force_escape %}<dialog>{% endfilter %}</code> element, see <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog" target="_blank">here</a>.</p>
+    <p>To ensure browser compatibility, we are including a <a href="https://github.com/GoogleChrome/dialog-polyfill" target="_blank">polyfill</a> so that this approach works on all browsers, including IE 9.</p>
+    <h2 class="styleguide-heading">Small Modal</h2>
+    <div id="smallDialog">
+        <button type="button" class="btn-open" id="modal_open" aria-label="open">Open Small Modal</button>
+        <dialog>
+            <h3>Small Modal Window</h3>
+            <p>Morbi quis nibh quam. Sed ipsum lacus, ultrices at rutrum in, dapibus in velit. Nunc dignissim, arcu in lacinia tempus, eros mi eleifend massa, ut elementum ante nulla id leo.</p>
+            <button type="button" class="btn-close" id="modal_close" aria-label="close">X</button>
+        </dialog>
+    </div>
+
+    <h2 class="styleguide-heading">Medium Modal</h2>
+    <div id="mediumDialog">
+        <button type="button" class="btn-open" id="modal_open" aria-label="open">Open Medium Modal</button>
+        <dialog>
+            <h3>Medium Modal Window</h3>
+            <p>Morbi quis nibh quam. Sed ipsum lacus, ultrices at rutrum in, dapibus in velit. Nunc dignissim, arcu in lacinia tempus, eros mi eleifend massa, ut elementum ante nulla id leo.</p>
+            <button type="button" class="btn-close" id="modal_close" aria-label="close">X</button>
+        </dialog>
+    </div>
+
+    <h2 class="styleguide-heading">Large Modal</h2>
+    <div id="largeDialog">
+        <button type="button" class="btn-open" id="modal_open" aria-label="open">Open Large Modal</button>
+        <dialog>
+            <h3>Large Modal Window</h3>
+            <p>Morbi quis nibh quam. Sed ipsum lacus, ultrices at rutrum in, dapibus in velit. Nunc dignissim, arcu in lacinia tempus, eros mi eleifend massa, ut elementum ante nulla id leo.</p>
+            <p>Phasellus ultricies varius quam. Suspendisse fringilla massa sapien, vel ornare diam bibendum nec. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+            <button type="button" class="btn-close" id="modal_close" aria-label="close">X</button>
+        </dialog>
+    </div>
+
+    <h2 class="styleguide-heading">Modal with a Form</h2>
+        <p>Your modal can contain a variety of things, including forms!</p>
+        <div id="formDialog">
+            <button type="button" class="btn-open" id="modal_open" aria-label="open">Open Form Modal</button>
+            <dialog>
+                <h3>Modal Form Title</h3>
+                <form>
+                    <fieldset>
+                        {% for field in create_user_form %}
+                            {{ field }}
+                            {{ field.label_tag }}
+                        {% endfor %}
+                        <input type=submit value="Save" formnovalidate>
+                    </fieldset>
+                </form>
+                <button type="button" class="btn-close" id="modal_close" aria-label="close">X</button>
+            </dialog>
+        </div>
+
+    <h2 class="styleguide-heading">Usage</h2>
+    {% example wide=True %}
+        <!-- DOCS -->
+        Here are the JS and HTML markup requirements in order for the Modals mixins to work.
+        <ul>
+            <li>1. HTML markup expects the following in the example block below. Our mixin expects the proper <code>aria-label</code> attributes for the open and close buttons to function properly. This is important. If you omit these attributes, the mixin will not work as intended.</li>
+            <li>2. There are 3 modal sizes to select from when you instantiate the modal mixin: small, medium, and large. They each take up 30%, 50%, and 80% of the screen width respectively. To select a modal size, simply instantiate the corresponding modal, eg. <code>let formModal = new MediumModal('formDialog')</code>.</li>
+        </ul>
+
+        <!-- HTML -->
+        <div id="mediumDialog">
+            <button type="button" class="btn-open" id="modal_open" aria-label="open">Open Medium Modal</button>
+            <dialog>
+                <h3>Medium Modal Window</h3>
+                <p>Morbi quis nibh quam. Sed ipsum lacus, ultrices at rutrum in, dapibus in velit. Nunc dignissim, arcu in lacinia tempus, eros mi eleifend massa, ut elementum ante nulla id leo.</p>
+                <button type="button" class="btn-close" id="modal_close" aria-label="close">X</button>
+            </dialog>
+        </div>
+
+        <!-- JS -->
+        let mediumModal = new MediumModal('mediumDialog')
+
+        {% endexample %}
+
+{% endblock %}
+
+{% block extra-js %}
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", () => {
+        let largeModal = new Modal('largeDialog', 'large')
+        let mediumModal = new Modal('mediumDialog', 'medium')
+        let smallModal = new Modal('smallDialog', 'small')
+        let formModal = new Modal('formDialog', 'medium')
+    })
+</script>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

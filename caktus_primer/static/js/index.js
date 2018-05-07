@@ -1,6 +1,11 @@
+import {Modal} from "./modal"
 import * as dropdowns from './dropdown.js'
 
 export const Dropdown = dropdowns.Dropdown
+
+// inserts modal exports into the window for the examples to user
+Object.assign(window, {Modal})
+
 
 window.CaktusPrimer = {
     categorySearchSelect: () => {
