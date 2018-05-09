@@ -1,4 +1,4 @@
-let clickEvents = ['click', 'mousedown', 'touchstart', 'dblclick']
+let clickEvents = ['click']
 let sizeMap = {'small': '30%', 'medium': '50%', 'large': '80%'}
 
 export class Modal {
