@@ -71,12 +71,11 @@
         <!-- DOCS -->
         Here are the JS and HTML markup requirements in order for the Modals mixins to work.
         <ul>
-            <li>1. HTML markup expects the following in the example block below. Our mixin expects the proper <code>aria-label</code> attributes for the open and close buttons to function properly. This is important. If you omit these attributes, the mixin will not work as intended.</li>
-            <li>2. There are 3 modal sizes to select from when you instantiate the modal mixin: small, medium, and large. They each take up 30%, 50%, and 80% of the screen width respectively. To select a modal size, simply instantiate the corresponding modal, eg. <code>let formModal = new MediumModal('formDialog')</code>.</li>
+            <li>HTML markup expects the following in the example block below. Our mixin expects the proper <code>aria-label</code> attributes for the open and close buttons to function properly. This is important. If you omit these attributes, the mixin will not work as intended.</li>
+            <li>There are 3 modal sizes to select from when you instantiate the modal mixin: <code>small</code>, <code>medium</code>, and <code>large</code>. They each take up 30%, 50%, and 80% of the screen width respectively. To select a modal size, simply instantiate the corresponding modal, eg. <code>let formModal = new Modal(id, size)</code>. If you omit the <code>size</code> parameter it will default to the <code>medium</code> size.</li>
         </ul>
-
         <!-- HTML -->
-        <div id="mediumDialog">
+        <div id="exampleDialog">
             <button type="button" class="btn-open" id="modal_open" aria-label="open">Open Medium Modal</button>
             <dialog>
                 <h3>Medium Modal Window</h3>
@@ -84,21 +83,22 @@
                 <button type="button" class="btn-close" id="modal_close" aria-label="close">X</button>
             </dialog>
         </div>
-
         <!-- JS -->
-        let mediumModal = new MediumModal('mediumDialog')
-
-        {% endexample %}
+        let mediumModal = new Modal('exampleDialog', 'medium')
+    {% endexample %}
 
 {% endblock %}
 
 {% block extra-js %}
+{{ block.super }}
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", () => {
         let largeModal = new Modal('largeDialog', 'large')
         let mediumModal = new Modal('mediumDialog', 'medium')
         let smallModal = new Modal('smallDialog', 'small')
         let formModal = new Modal('formDialog', 'medium')
+
+        let exampleDialog = new Modal('exampleDialog', 'medium')
     })
 </script>
 {% endblock %}
