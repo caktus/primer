@@ -13,8 +13,8 @@ export class Modal {
 
             // Attach event listeners to our click events to handle opening and closing the modal window
             clickEvents.forEach((n) => {
-                this.openTarget.addEventListener(n, (e) => { this.onClick(e) })
-                this.closeTarget.addEventListener(n, (e) => { this.handleClick(e) })
+                this.openTarget.addEventListener(n, (e) => { this.handleClick(e) })
+                this.closeTarget.addEventListener(n, (e) => { this.closeModal(e) })
             })
 
             this.dialogTarget.addEventListener("close", () => {
