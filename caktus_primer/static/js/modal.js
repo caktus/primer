@@ -5,7 +5,6 @@ export class Modal {
     constructor(id, size = 'medium') {
         this.name = 'Modal'
         this.container = document.getElementById(id)
-        console.log("Modal", id, size, this.container)
         if (this.container) {
             this.openTarget = this.container.querySelector('[aria-label="open"]')
             this.dialogTarget = this.container.getElementsByTagName('dialog')[0]
@@ -14,12 +13,12 @@ export class Modal {
 
             // Attach event listeners to our click events to handle opening and closing the modal window
             clickEvents.forEach((n) => {
-                this.openTarget.addEventListener(n, (e) => { this.handleClick(e) })
-                this.closeTarget.addEventListener(n, (e) => { this.closeModal(e) })
+                this.openTarget.addEventListener(n, (e) => { this.onClick(e) })
+                this.closeTarget.addEventListener(n, (e) => { this.handleClick(e) })
             })
 
             this.dialogTarget.addEventListener("close", () => {
-                document.body.style.overflow = ''
+                this.resetScrolling()
             })
             
             document.addEventListener('keypress', (e) => {
@@ -41,6 +40,10 @@ export class Modal {
 
     closeModal() {
         this.dialogTarget.close()
+        this.resetScrolling()
+    }
+
+    resetScrolling() {
         document.body.style.overflow = ''
     }
 }
